@@ -12,8 +12,9 @@ public class ContactController {
     Label clockLabel;
     @FXML
     public void initialize(){
-        Clock clock = new Clock(clockLabel);
-        clock.initClock();
+        Clock clk = new Clock(clockLabel);
+        Thread th = new Thread(clk::run);
+        th.start();
     }
     @FXML
     public void logOutButton(MouseEvent event) throws IOException {

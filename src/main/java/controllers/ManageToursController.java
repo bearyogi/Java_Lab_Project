@@ -12,8 +12,9 @@ public class ManageToursController {
     Label clockLabel;
     @FXML
     public void initialize(){
-        Clock clock = new Clock(clockLabel);
-        clock.initClock();
+        Clock clk = new Clock(clockLabel);
+        Thread th = new Thread(clk::run);
+        th.start();
     }
     public void goBackButton(MouseEvent event) throws IOException {
         SceneCreator.launchScene("../../resources/fxml-files/UserScene.fxml");
