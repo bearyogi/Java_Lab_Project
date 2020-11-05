@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import java.net.*;
+import java.io.*;
 
 public class Main extends Application {
 
@@ -23,8 +25,19 @@ static Main main;
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         main = new Main();
+        Socket s = new Socket("localhost", 4999);
+
+        PrintWriter pr = new PrintWriter(s.getOutputStream());
+        pr.println("Hi, its me, Server!");
+        pr.flush();
+
+        InputStreamReader in = new InputStreamReader(s.getInputStream());
+        BufferedReader bf = new BufferedReader(in);
+
+        String str = bf.readLine();
+        System.out.println("server : " + str);
         launch(args);
     }
 
