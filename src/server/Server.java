@@ -23,16 +23,16 @@ public class Server {
 
        while(true){
            socket = serverSocket.accept();
-           new EchoThread(socket,connection).start();
+           new MyThread(socket,connection).start();
        }
 
     }
 }
 
-class EchoThread extends Thread{
+class MyThread extends Thread{
     protected Socket socket;
     protected Connection connection;
-    public EchoThread(Socket clientSocket, Connection connection){
+    public MyThread(Socket clientSocket, Connection connection){
         this.socket = clientSocket;
         this.connection = connection;
     }
@@ -60,9 +60,13 @@ class EchoThread extends Thread{
                     return;
                 }else {
                     String[] s = line.split("\\s+");
-                    if (s[0].equals("login")) {
+                    if (s[0].equals("users")) {
                         makeLoginQuery(dataOutputStream, s);
-                    }else{
+                    }else if(s[0].equals("register")){
+                        makeRegisterQuery(dataOutputStream, s);
+                    }
+
+                    else{
                         dataOutputStream.writeBytes(line + "\n\r");
                         dataOutputStream.flush();
                     }
@@ -81,11 +85,34 @@ class EchoThread extends Thread{
         System.out.println(sql);
         ResultSet rs = stat.executeQuery(sql);
 
-        if (rs.next() != false) {
+        if (rs.next()) {
             dataOutputStream.writeBytes("Accepted" + "\n\r");
             dataOutputStream.flush();
         } else {
             dataOutputStream.writeBytes("Rejected" + "\n\r");
+            dataOutputStream.flush();
+        }
+    }
+
+    public void makeRegisterQuery(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
+        Statement stat = connection.createStatement();
+        String sql = "select * from filmdb." + "users" + " where userLogin = '" + s[1] + "' or userEmail = '" + s[5] + "'";
+        System.out.println(sql);
+        ResultSet rs = stat.executeQuery(sql);
+
+        if (rs.next()) {
+            dataOutputStream.writeBytes("Rejected" + "\n\r");
+            dataOutputStream.flush();
+        } else {
+            sql = "select * from filmdb." + "users" + " where idUser = (select max(idUser) from users);";
+            System.out.println(sql);
+            rs = stat.executeQuery(sql);
+            rs.next();
+            int biggestId = rs.getInt("idUser") + 1;
+            sql = "insert into filmdb." + "users" + " (idUser, userLogin, userPassword, userName, userSurname, userEmail) values (\"" + biggestId + "\",\"" + s[1]+ "\",\"" + s[2]+ "\",\"" + s[3]+ "\",\"" + s[4]+ "\",\"" + s[5] + "\");";
+            System.out.println(sql);
+            int us = stat.executeUpdate(sql);
+            dataOutputStream.writeBytes("Accepted" + "\n\r");
             dataOutputStream.flush();
         }
     }
