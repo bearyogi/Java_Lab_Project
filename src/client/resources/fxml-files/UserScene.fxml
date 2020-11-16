@@ -8,7 +8,7 @@
 
 <AnchorPane prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #CACACA;" styleClass="bodybg" stylesheets="@../css-files/User_background.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.java.controllers.UserController">
    <children>
-      <Label layoutY="-2.0" prefHeight="49.0" prefWidth="1028.0" style="-fx-background-color: #525252;" text=" Widok klienta" textFill="WHITE">
+      <Label layoutY="-2.0" prefHeight="53.0" prefWidth="1028.0" style="-fx-background-color: #525252;" text=" Widok klienta" textFill="WHITE">
          <font>
             <Font size="36.0" />
          </font>
@@ -39,48 +39,73 @@
                   <Font size="42.0" />
                </font>
             </Button>
-            <Line endX="-493.0" endY="63.0" layoutX="266.0" layoutY="56.0" startX="-274.0" startY="63.0" stroke="#525252" strokeWidth="2.0" />
+            <Line endX="-493.0" endY="63.0" layoutX="266.0" layoutY="56.0" startX="-241.0" startY="63.0" stroke="#525252" strokeWidth="2.0" />
          </children></AnchorPane>
-      <AnchorPane depthTest="DISABLE" layoutY="50.0" prefHeight="724.0" prefWidth="234.0" style="-fx-background-color: #353238; -fx-opacity: 95%; -fx-border-color: #7775; -fx-border-width: 4;">
+      <AnchorPane depthTest="DISABLE" layoutY="48.0" prefHeight="726.0" prefWidth="266.0" style="-fx-background-color: #353238; -fx-opacity: 95%; -fx-border-color: #7775; -fx-border-width: 4;">
          <children>
-            <Button fx:id="editButton" layoutX="12.0" layoutY="656.0" mnemonicParsing="false" onMouseClicked="#editButton" prefHeight="39.0" prefWidth="205.0" style="-fx-background-color: #7775;" text="Edytuj dane" textFill="WHITE">
+            <Button fx:id="editButton" layoutX="12.0" layoutY="656.0" mnemonicParsing="false" onMouseClicked="#editButton" prefHeight="39.0" prefWidth="242.0" style="-fx-background-color: #7775;" text="Edytuj dane" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Label layoutX="12.0" layoutY="14.0" prefHeight="43.0" prefWidth="143.0" text="Witaj, Imię" textFill="#b5b5b5">
+            <Label fx:id="helloUser" layoutX="12.0" layoutY="14.0" prefHeight="43.0" prefWidth="242.0" text="Witaj, Imię" textFill="#b5b5b5">
                <font>
-                  <Font size="29.0" />
+                  <Font size="26.0" />
                </font>
             </Label>
-            <Label layoutX="12.0" layoutY="65.0" prefHeight="36.0" prefWidth="113.0" text="Twoje dane:" textFill="#b5b5b5">
+            <Label layoutX="12.0" layoutY="65.0" prefHeight="36.0" prefWidth="242.0" text="Twoje dane:" textFill="#b5b5b5">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label layoutX="12.0" layoutY="256.0" prefHeight="36.0" prefWidth="182.0" text="Email" textFill="#b5b5b5">
+            <Label fx:id="emailLabel" layoutX="12.0" layoutY="372.0" prefHeight="36.0" prefWidth="242.0" text="Email" textFill="#b5b5b5">
                <font>
-                  <Font size="26.0" />
+                  <Font size="17.0" />
                </font>
             </Label>
-            <Label layoutX="12.0" layoutY="195.0" prefHeight="36.0" prefWidth="182.0" text="Nazwisko" textFill="#b5b5b5">
+            <Label fx:id="surnameLabel" layoutX="12.0" layoutY="274.0" prefHeight="36.0" prefWidth="242.0" text="Nazwisko" textFill="#b5b5b5">
                <font>
-                  <Font size="26.0" />
+                  <Font size="17.0" />
                </font>
             </Label>
-            <Label layoutX="12.0" layoutY="141.0" prefHeight="36.0" prefWidth="182.0" text="Imię" textFill="#b5b5b5">
+            <Label fx:id="nameLabel" layoutX="12.0" layoutY="172.0" prefHeight="36.0" prefWidth="242.0" text="Imię" textFill="#b5b5b5">
                <font>
-                  <Font size="26.0" />
+                  <Font size="17.0" />
                </font>
             </Label>
-            <Label layoutX="12.0" layoutY="321.0" prefHeight="36.0" prefWidth="182.0" text="Nazwa" textFill="#b5b5b5">
+            <Label fx:id="nickLabel" layoutX="12.0" layoutY="466.0" prefHeight="36.0" prefWidth="242.0" text="Nazwa" textFill="#b5b5b5">
                <font>
-                  <Font size="26.0" />
+                  <Font size="17.0" />
                </font>
             </Label>
-            <Label layoutX="12.0" layoutY="382.0" prefHeight="36.0" prefWidth="182.0" text="Ilość wycieczek" textFill="#b5b5b5">
+            <Label fx:id="countLabel" layoutX="12.0" layoutY="562.0" prefHeight="36.0" prefWidth="242.0" text="Ilość wycieczek" textFill="#b5b5b5">
                <font>
-                  <Font size="26.0" />
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="12.0" layoutY="526.0" prefHeight="36.0" prefWidth="242.0" text="Ilość wycieczek:" textFill="#b5b5b5">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="12.0" layoutY="430.0" prefHeight="36.0" prefWidth="242.0" text="Nick:" textFill="#b5b5b5">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="12.0" layoutY="336.0" prefHeight="36.0" prefWidth="242.0" text="Email:" textFill="#b5b5b5">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="12.0" layoutY="238.0" prefHeight="36.0" prefWidth="242.0" text="Nazwisko:" textFill="#b5b5b5">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="13.0" layoutY="136.0" prefHeight="36.0" prefWidth="242.0" text="Imię:" textFill="#b5b5b5">
+               <font>
+                  <Font size="17.0" />
                </font>
             </Label>
          </children>

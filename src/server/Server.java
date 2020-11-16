@@ -13,7 +13,7 @@ public class Server {
 
     public static void main(String[] args) throws IOException, SQLException {
 
-        String host = "jdbc:mysql://localhost:3306/filmdb?serverTimezone=UTC";
+        String host = "jdbc:mysql://localhost:3306/filmdb?serverTimezone=UTC&useUnicode=yes&characterEncoding=UTF-8";
         String userName = "root";
         String userPassword = "Minotaur21#";
         Connection connection = DriverManager.getConnection(host,userName,userPassword);
@@ -64,6 +64,10 @@ class MyThread extends Thread{
                         makeLoginQuery(dataOutputStream, s);
                     }else if(s[0].equals("register")){
                         makeRegisterQuery(dataOutputStream, s);
+                    }else if(s[0].equals("getUserData")){
+                        getUserDataQuery(dataOutputStream, s);
+                    }else if(s[0].equals("changeUserData")){
+                        changeUserDataQuery(dataOutputStream,s);
                     }
 
                     else{
@@ -117,6 +121,37 @@ class MyThread extends Thread{
         }
     }
 
+    public void getUserDataQuery(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
+        Statement stat = connection.createStatement();
+        String sql = "select * from filmdb." + "users" + " where userLogin = '" + s[1] + "';";
+        System.out.println(sql);
+        ResultSet rs = stat.executeQuery(sql);
+
+        if (rs.next()) {
+            dataOutputStream.writeBytes(rs.getString("userLogin") + " " +rs.getString("userPassword") + " " + rs.getString("userName") + " " + rs.getString("userSurname") +" " + rs.getString("userEmail") + "\n\r");
+            dataOutputStream.flush();
+        }
+    }
+
+    public void changeUserDataQuery(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
+        Statement stat = connection.createStatement();
+
+        String sql = "select * from filmdb." + "users" + " where userEmail = '" + s[3] + "';";
+        System.out.println(sql);
+        ResultSet rs = stat.executeQuery(sql);
+        if(rs.next()){
+            dataOutputStream.writeBytes(  "Rejected"+ "\n\r");
+            dataOutputStream.flush();
+        }else{
+            sql = "update filmdb.users set userName = " + "\"" + s[1] + "\", userSurname = \"" + s[2] + "\", userEmail = \"" + s[3] + "\", userPassword = \"" + s[4] + "\"" + " where (userLogin = \"" + s[5] + "\");";
+            System.out.println(sql);
+            int us = stat.executeUpdate(sql);
+            dataOutputStream.writeBytes(  "Accepted"+ "\n\r");
+            dataOutputStream.flush();
+        }
+
+
+    }
 
 
 }

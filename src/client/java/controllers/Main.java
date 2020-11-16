@@ -1,5 +1,6 @@
 package client.java.controllers;
 
+import client.resources.tools.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,9 +14,13 @@ public class Main extends Application {
 static Parent root;
 static Stage primaryStage;
 static Main main;
+static User activeUser;
+
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         root = FXMLLoader.load(getClass().getResource("../../resources/fxml-files/LogInScene.fxml"));
+        activeUser = new User();
         Main.primaryStage = primaryStage;
         primaryStage.setTitle("Booking Application");
         Scene welcomeScene = new Scene(root, 1024, 768);
@@ -55,5 +60,11 @@ static Main main;
     public static void setStage(Stage stage) {
 
         Main.primaryStage = stage;
+    }
+    public static void setUser(User user) {
+        Main.activeUser = user;
+    }
+    public static User getUser(){
+        return Main.activeUser;
     }
 }

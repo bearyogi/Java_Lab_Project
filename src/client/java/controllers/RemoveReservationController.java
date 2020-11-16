@@ -18,11 +18,11 @@ public class RemoveReservationController {
     }
     @FXML
     public void logOutButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("../../resources/fxml-files/LogInScene.fxml");
+        SceneCreator.launchScene("../../resources/fxml-files/LogInScene.fxml",Main.getUser());
     }
     @FXML
     public void goBackButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("../../resources/fxml-files/UserScene.fxml");
+        SceneCreator.launchScene("../../resources/fxml-files/UserScene.fxml",Main.getUser());
     }
 
     //TODO: reservation removing software, implement and show on screen

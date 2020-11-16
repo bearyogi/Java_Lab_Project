@@ -18,6 +18,6 @@ public class AdminController {
     }
     @FXML
     public void logOutButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("../../resources/fxml-files/LogInScene.fxml");
+        SceneCreator.launchScene("../../resources/fxml-files/LogInScene.fxml",Main.getUser());
     }
 }

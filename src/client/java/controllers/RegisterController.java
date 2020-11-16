@@ -1,12 +1,15 @@
 package client.java.controllers;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Bounds;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
@@ -31,7 +34,8 @@ public class RegisterController {
   TextField surnameBox;
   @FXML
   TextField emailBox;
-
+  @FXML
+  AnchorPane mainPane;
 
     @FXML
     public void registerButton(MouseEvent event) throws IOException{
@@ -46,7 +50,7 @@ public class RegisterController {
       }
     }
     public void goBackButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("../../resources/fxml-files/LogInScene.fxml");
+        SceneCreator.launchScene("../../resources/fxml-files/LogInScene.fxml",Main.getUser());
     }
 
   public void communicateWithServer() throws IOException {
@@ -72,7 +76,7 @@ public class RegisterController {
       alert.showAndWait();
 
 
-      SceneCreator.launchScene("../../resources/fxml-files/LogInScene.fxml");
+      SceneCreator.launchScene("../../resources/fxml-files/LogInScene.fxml",Main.getUser());
     } else {
       errorLabel.setText("Użytkownik o podanych danych (email,nick) już istnieje!");
     }

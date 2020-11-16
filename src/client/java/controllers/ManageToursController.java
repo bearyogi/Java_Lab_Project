@@ -17,9 +17,9 @@ public class ManageToursController {
         th.start();
     }
     public void goBackButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("../../resources/fxml-files/UserScene.fxml");
+        SceneCreator.launchScene("../../resources/fxml-files/UserScene.fxml",Main.getUser());
     }
     public void logOutButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("../../resources/fxml-files/LogInScene.fxml");
+        SceneCreator.launchScene("../../resources/fxml-files/LogInScene.fxml",Main.getUser());
     }
 }
