@@ -27,7 +27,6 @@ static User activeUser;
         primaryStage.setResizable(false);
         primaryStage.setScene(welcomeScene);
         primaryStage.show();
-        System.out.println("THREADS: " + Thread.activeCount());
     }
 
 
