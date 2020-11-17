@@ -1,5 +1,6 @@
 package client.java.controllers;
 
+import client.resources.tools.Tour;
 import client.resources.tools.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,12 +16,13 @@ static Parent root;
 static Stage primaryStage;
 static Main main;
 static User activeUser;
-
+static Tour activeTour;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         root = FXMLLoader.load(getClass().getResource("../../resources/fxml-files/LogInScene.fxml"));
         activeUser = new User();
+        activeTour = new Tour();
         Main.primaryStage = primaryStage;
         primaryStage.setTitle("Booking Application");
         Scene welcomeScene = new Scene(root, 1024, 768);
@@ -66,5 +68,9 @@ static User activeUser;
     }
     public static User getUser(){
         return Main.activeUser;
+    }
+
+    public static Tour getTour(){
+        return Main.activeTour;
     }
 }

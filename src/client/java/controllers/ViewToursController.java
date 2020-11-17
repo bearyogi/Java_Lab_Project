@@ -4,10 +4,8 @@ import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -15,7 +13,6 @@ import client.resources.tools.Clock;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -45,7 +42,6 @@ public class ViewToursController {
   int gridPaneRows;
   int gridPaneColumns = 4;
   int iterator = 1;
-    private Label Ab;
 
     @FXML
     public void initialize() throws IOException {
@@ -125,5 +121,20 @@ public class ViewToursController {
         hBox.getChildren().add(picture);
         GridPane.setConstraints(picture, columnNumber, rowNumber, 1,1, HPos.CENTER, VPos.CENTER);
         gridPane.getChildren().addAll(picture);
+
+        picture.setOnMouseClicked(e -> {
+            Main.getTour().setTitle(s[1]);
+            Main.getTour().setText(s[2]);
+            Main.getTour().setDistance(Integer.parseInt(s[3]));
+            Main.getTour().setDays(Integer.parseInt(s[4]));
+            Main.getTour().setPrice(Integer.parseInt(s[5]));
+            Main.getTour().setAvailableTickets(Integer.parseInt(s[6]));
+            Main.getTour().setImage(s[7]);
+            try {
+                SceneCreator.launchScene("../../resources/fxml-files/ViewOneTourScene.fxml", Main.getUser());
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
     }
 }
