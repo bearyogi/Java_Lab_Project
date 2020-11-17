@@ -1,11 +1,10 @@
 package server;
 
-import com.sun.javafx.iio.ios.IosDescriptor;
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.*;
+import java.util.concurrent.Semaphore;
 
 public class Server {
 
@@ -18,12 +17,12 @@ public class Server {
         String userPassword = "Minotaur21#";
         Connection connection = DriverManager.getConnection(host,userName,userPassword);
 
-        Socket socket = null;
+        Socket socket;
         ServerSocket serverSocket = new ServerSocket(PORT);
-
+        Semaphore semaphore = new Semaphore(1);
        while(true){
            socket = serverSocket.accept();
-           new MyThread(socket,connection).start();
+           new MyThread(socket,connection,semaphore).start();
        }
 
     }
@@ -32,21 +31,23 @@ public class Server {
 class MyThread extends Thread{
     protected Socket socket;
     protected Connection connection;
-    public MyThread(Socket clientSocket, Connection connection){
+    protected Semaphore semaphore;
+    public MyThread(Socket clientSocket, Connection connection, Semaphore semaphore){
         this.socket = clientSocket;
         this.connection = connection;
+        this.semaphore = semaphore;
     }
-
     public void run(){
-        InputStream inputStream = null;
-        BufferedReader bufferedReader = null;
-        DataOutputStream dataOutputStream = null;
+        InputStream inputStream;
+        BufferedReader bufferedReader;
+        DataOutputStream dataOutputStream;
 
         try{
             inputStream = socket.getInputStream();
             bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             dataOutputStream = new DataOutputStream(socket.getOutputStream());
-        }catch(IOException e){
+            semaphore.acquire();
+        }catch(IOException | InterruptedException e){
             return;
         }
 
@@ -57,30 +58,36 @@ class MyThread extends Thread{
 
                 if((line == null) || line.equalsIgnoreCase("QUIT")){
                     socket.close();
-                    return;
                 }else {
                     String[] s = line.split("\\s+");
-                    if (s[0].equals("users")) {
-                        makeLoginQuery(dataOutputStream, s);
-                    }else if(s[0].equals("register")){
-                        makeRegisterQuery(dataOutputStream, s);
-                    }else if(s[0].equals("getUserData")){
-                        getUserDataQuery(dataOutputStream, s);
-                    }else if(s[0].equals("changeUserData")){
-                        changeUserDataQuery(dataOutputStream,s);
+                    switch (s[0]) {
+                        case "users":
+                            makeLoginQuery(dataOutputStream, s);
+                            break;
+                        case "register":
+                            makeRegisterQuery(dataOutputStream, s);
+                            break;
+                        case "getUserData":
+                            getUserDataQuery(dataOutputStream, s);
+                            break;
+                        case "changeUserData":
+                            changeUserDataQuery(dataOutputStream, s);
+                            break;
+                        default:
+                            dataOutputStream.writeBytes(line + "\n\r");
+                            dataOutputStream.flush();
+                            break;
                     }
-
-                    else{
-                        dataOutputStream.writeBytes(line + "\n\r");
-                        dataOutputStream.flush();
-                    }
+                    socket.close();
+                    semaphore.release();
                 }
-
+                return;
             }catch(IOException | SQLException e){
                 e.printStackTrace();
                 return;
             }
         }
+
     }
 
     public void makeLoginQuery(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
@@ -91,11 +98,10 @@ class MyThread extends Thread{
 
         if (rs.next()) {
             dataOutputStream.writeBytes("Accepted" + "\n\r");
-            dataOutputStream.flush();
         } else {
             dataOutputStream.writeBytes("Rejected" + "\n\r");
-            dataOutputStream.flush();
         }
+        dataOutputStream.flush();
     }
 
     public void makeRegisterQuery(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
@@ -106,7 +112,6 @@ class MyThread extends Thread{
 
         if (rs.next()) {
             dataOutputStream.writeBytes("Rejected" + "\n\r");
-            dataOutputStream.flush();
         } else {
             sql = "select * from filmdb." + "users" + " where idUser = (select max(idUser) from users);";
             System.out.println(sql);
@@ -115,10 +120,10 @@ class MyThread extends Thread{
             int biggestId = rs.getInt("idUser") + 1;
             sql = "insert into filmdb." + "users" + " (idUser, userLogin, userPassword, userName, userSurname, userEmail) values (\"" + biggestId + "\",\"" + s[1]+ "\",\"" + s[2]+ "\",\"" + s[3]+ "\",\"" + s[4]+ "\",\"" + s[5] + "\");";
             System.out.println(sql);
-            int us = stat.executeUpdate(sql);
+            stat.executeUpdate(sql);
             dataOutputStream.writeBytes("Accepted" + "\n\r");
-            dataOutputStream.flush();
         }
+        dataOutputStream.flush();
     }
 
     public void getUserDataQuery(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
@@ -141,14 +146,13 @@ class MyThread extends Thread{
         ResultSet rs = stat.executeQuery(sql);
         if(rs.next()){
             dataOutputStream.writeBytes(  "Rejected"+ "\n\r");
-            dataOutputStream.flush();
         }else{
             sql = "update filmdb.users set userName = " + "\"" + s[1] + "\", userSurname = \"" + s[2] + "\", userEmail = \"" + s[3] + "\", userPassword = \"" + s[4] + "\"" + " where (userLogin = \"" + s[5] + "\");";
             System.out.println(sql);
-            int us = stat.executeUpdate(sql);
+            stat.executeUpdate(sql);
             dataOutputStream.writeBytes(  "Accepted"+ "\n\r");
-            dataOutputStream.flush();
         }
+        dataOutputStream.flush();
 
 
     }

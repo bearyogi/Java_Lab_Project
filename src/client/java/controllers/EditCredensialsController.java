@@ -37,10 +37,13 @@ public class EditCredensialsController {
     TextField passwordInput;
     @FXML
     Label errorLabel;
+
+    Clock clk;
+    Thread th;
     @FXML
     public void initialize(){
-        Clock clk = new Clock(clockLabel);
-        Thread th = new Thread(clk);
+        clk = new Clock(clockLabel);
+        th = new Thread(clk);
         th.start();
         nameLabel.setText(Main.getUser().getName());
         surnameLabel.setText(Main.getUser().getSurname());
@@ -50,6 +53,7 @@ public class EditCredensialsController {
     }
     public void logOutButton(MouseEvent event) throws IOException {
         SceneCreator.launchScene("../../resources/fxml-files/LogInScene.fxml",Main.getUser());
+        shutdown();
     }
     public void confirmButton(MouseEvent event) throws IOException {
         if (nameInput.getText().isEmpty() || surnameInput.getText().isEmpty() || emailInput.getText().isEmpty() || passwordInput.getText().isEmpty()) {
@@ -62,6 +66,7 @@ public class EditCredensialsController {
     }
     public void goBackButton(MouseEvent event) throws IOException {
         SceneCreator.launchScene("../../resources/fxml-files/UserScene.fxml",Main.getUser());
+        shutdown();
     }
     public void communicateWithServer() throws IOException {
         String result = "changeUserData " + nameInput.getText() + " " + surnameInput.getText() + " " + emailInput.getText() + " " + passwordInput.getText() + " " + Main.getUser().getNick();
@@ -86,8 +91,12 @@ public class EditCredensialsController {
             alert.setY(384);
             alert.showAndWait();
             SceneCreator.launchScene("../../resources/fxml-files/UserScene.fxml",Main.getUser());
+            shutdown();
             }else{
                 errorLabel.setText("Wpisany adres e-mail jest już używany!");
             }
+    }
+    public void shutdown(){
+        clk.terminate();
     }
 }

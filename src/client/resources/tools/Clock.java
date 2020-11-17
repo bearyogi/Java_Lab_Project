@@ -6,13 +6,14 @@ import java.time.format.DateTimeFormatter;
 
 public class Clock implements Runnable{
 Label clockLabel;
+public boolean flag = true;
     public Clock(Label clockLabel){
         this.clockLabel = clockLabel;
     }
 
     @Override
     public void run() {
-        while (true) {
+        while (flag) {
             LocalTime currentTime = LocalTime.now();
             final String time = currentTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
             Platform.runLater( () -> clockLabel.setText(time));
@@ -22,5 +23,8 @@ Label clockLabel;
                 e.printStackTrace();
             }
         }
+    }
+    public void terminate(){
+        flag = false;
     }
 }

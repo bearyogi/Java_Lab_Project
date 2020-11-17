@@ -10,14 +10,21 @@ import java.io.IOException;
 public class AdminController {
     @FXML
     Label clockLabel;
+
+    Clock clk;
+    Thread th;
     @FXML
     public void initialize(){
-        Clock clk = new Clock(clockLabel);
-        Thread th = new Thread(clk);
+         clk = new Clock(clockLabel);
+         th = new Thread(clk);
         th.start();
     }
     @FXML
     public void logOutButton(MouseEvent event) throws IOException {
         SceneCreator.launchScene("../../resources/fxml-files/LogInScene.fxml",Main.getUser());
+        shutdown();
+    }
+    public void shutdown(){
+        clk.terminate();
     }
 }
