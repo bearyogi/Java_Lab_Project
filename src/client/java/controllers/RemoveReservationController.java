@@ -8,7 +8,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import client.resources.tools.Clock;
 
@@ -17,10 +16,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 import static java.util.Objects.isNull;
 

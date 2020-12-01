@@ -28,37 +28,39 @@ public class Server {
     }
 }
 
-class MyThread extends Thread{
+class MyThread extends Thread {
     protected Socket socket;
     protected Connection connection;
     protected Semaphore semaphore;
-    public MyThread(Socket clientSocket, Connection connection, Semaphore semaphore){
+
+    public MyThread(Socket clientSocket, Connection connection, Semaphore semaphore) {
         this.socket = clientSocket;
         this.connection = connection;
         this.semaphore = semaphore;
     }
-    public void run(){
+
+    public void run() {
         InputStream inputStream;
         BufferedReader bufferedReader;
         DataOutputStream dataOutputStream;
 
-        try{
+        try {
             inputStream = socket.getInputStream();
             bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             dataOutputStream = new DataOutputStream(socket.getOutputStream());
             semaphore.acquire();
-        }catch(IOException | InterruptedException e){
+        } catch (IOException | InterruptedException e) {
             return;
         }
 
         String line;
-        while(true){
-            try{
+        while (true) {
+            try {
                 line = bufferedReader.readLine();
 
-                if((line == null) || line.equalsIgnoreCase("QUIT")){
+                if ((line == null) || line.equalsIgnoreCase("QUIT")) {
                     socket.close();
-                }else {
+                } else {
                     String[] s = line.split("\\s+");
                     switch (s[0]) {
                         case "users":
@@ -74,25 +76,32 @@ class MyThread extends Thread{
                             changeUserDataQuery(dataOutputStream, s);
                             break;
                         case "getToursNumber":
-                            getToursNumber(dataOutputStream,s);
+                            getToursNumber(dataOutputStream, s);
                             break;
                         case "getTour":
-                            getTour(dataOutputStream,s);
+                            getTour(dataOutputStream, s);
                             break;
                         case "changeAvailableTickets":
-                            changeAvailableTickets(dataOutputStream,s);
+                            changeAvailableTickets(dataOutputStream, s);
                             break;
                         case "makeReservation":
-                            makeReservationQuery(dataOutputStream,s);
+                            makeReservationQuery(dataOutputStream, s);
                             break;
                         case "deleteReservation":
-                            deleteReservation(dataOutputStream,s);
+                            deleteReservation(dataOutputStream, s);
                             break;
                         case "getAllReservations":
-                            getAllReservations(dataOutputStream,s);
+                            getAllReservations(dataOutputStream, s);
                             break;
                         case "giveBack":
-                            giveBackToTour(dataOutputStream,s);
+                            giveBackToTour(dataOutputStream, s);
+                            break;
+                        case "getTourId":
+                            getTourId(dataOutputStream, s);
+                            break;
+                        case "changeToPayed":
+                            changeToPayed(dataOutputStream, s);
+                            break;
                         default:
                             dataOutputStream.writeBytes(line + "\n\r");
                             dataOutputStream.flush();
@@ -102,7 +111,7 @@ class MyThread extends Thread{
                     semaphore.release();
                 }
                 return;
-            }catch(IOException | SQLException e){
+            } catch (IOException | SQLException e) {
                 e.printStackTrace();
                 return;
             }
@@ -110,26 +119,26 @@ class MyThread extends Thread{
 
     }
 
-    private void getTour(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException{
+    private void getTour(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
         Statement stat = connection.createStatement();
         String result = "";
         String sql = "select * from filmdb.tours where tourId = " + s[1];
         System.out.println(sql);
         ResultSet rs = stat.executeQuery(sql);
-        if(rs.next()){
+        if (rs.next()) {
             result = rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + " " + rs.getString(5) + " " + rs.getString(6) + " " + rs.getString(7) + " " + rs.getString(8);
         }
         dataOutputStream.writeBytes(result);
         dataOutputStream.flush();
     }
 
-    private void getToursNumber(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException{
+    private void getToursNumber(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
         Statement stat = connection.createStatement();
         String result = "";
         String sql = "select count(*) as number from filmdb.tours";
         System.out.println(sql);
         ResultSet rs = stat.executeQuery(sql);
-        if(rs.next()){
+        if (rs.next()) {
             result = rs.getString(1);
         }
         dataOutputStream.writeBytes(result);
@@ -164,7 +173,7 @@ class MyThread extends Thread{
             rs = stat.executeQuery(sql);
             rs.next();
             int biggestId = rs.getInt("idUser") + 1;
-            sql = "insert into filmdb." + "users" + " (idUser, userLogin, userPassword, userName, userSurname, userEmail) values (\"" + biggestId + "\",\"" + s[1]+ "\",\"" + s[2]+ "\",\"" + s[3]+ "\",\"" + s[4]+ "\",\"" + s[5] + "\");";
+            sql = "insert into filmdb." + "users" + " (idUser, userLogin, userPassword, userName, userSurname, userEmail) values (\"" + biggestId + "\",\"" + s[1] + "\",\"" + s[2] + "\",\"" + s[3] + "\",\"" + s[4] + "\",\"" + s[5] + "\");";
             System.out.println(sql);
             stat.executeUpdate(sql);
             dataOutputStream.writeBytes("Accepted" + "\n\r");
@@ -179,7 +188,7 @@ class MyThread extends Thread{
         ResultSet rs = stat.executeQuery(sql);
 
         if (rs.next()) {
-            dataOutputStream.writeBytes(rs.getInt("idUser") + " " + rs.getString("userLogin") + " " +rs.getString("userPassword") + " " + rs.getString("userName") + " " + rs.getString("userSurname") +" " + rs.getString("userEmail") + "\n\r");
+            dataOutputStream.writeBytes(rs.getInt("idUser") + " " + rs.getString("userLogin") + " " + rs.getString("userPassword") + " " + rs.getString("userName") + " " + rs.getString("userSurname") + " " + rs.getString("userEmail") + "\n\r");
             dataOutputStream.flush();
         }
     }
@@ -190,13 +199,13 @@ class MyThread extends Thread{
         String sql = "select * from filmdb." + "users" + " where userEmail = '" + s[3] + "';";
         System.out.println(sql);
         ResultSet rs = stat.executeQuery(sql);
-        if(rs.next()){
-            dataOutputStream.writeBytes(  "Rejected"+ "\n\r");
-        }else{
+        if (rs.next()) {
+            dataOutputStream.writeBytes("Rejected" + "\n\r");
+        } else {
             sql = "update filmdb.users set userName = " + "\"" + s[1] + "\", userSurname = \"" + s[2] + "\", userEmail = \"" + s[3] + "\", userPassword = \"" + s[4] + "\"" + " where (userLogin = \"" + s[5] + "\");";
             System.out.println(sql);
             stat.executeUpdate(sql);
-            dataOutputStream.writeBytes(  "Accepted"+ "\n\r");
+            dataOutputStream.writeBytes("Accepted" + "\n\r");
         }
         dataOutputStream.flush();
     }
@@ -207,16 +216,17 @@ class MyThread extends Thread{
         String sql = "select * from filmdb." + "tours" + " where tourId = " + s[1] + ";";
         System.out.println(sql);
         ResultSet rs = stat.executeQuery(sql);
-        if(!rs.next()){
-            dataOutputStream.writeBytes(  "Rejected"+ "\n\r");
-        }else{
-            sql = "update filmdb.tours set availableTickets = " + "\"" + s[2] + "\""  + " where (tourId = " + s[1] + ");";
+        if (!rs.next()) {
+            dataOutputStream.writeBytes("Rejected" + "\n\r");
+        } else {
+            sql = "update filmdb.tours set availableTickets = " + "\"" + s[2] + "\"" + " where (tourId = " + s[1] + ");";
             System.out.println(sql);
             stat.executeUpdate(sql);
-            dataOutputStream.writeBytes(  "Accepted"+ "\n\r");
+            dataOutputStream.writeBytes("Accepted" + "\n\r");
         }
         dataOutputStream.flush();
     }
+
     public void makeReservationQuery(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
         Statement stat = connection.createStatement();
         String sql = "select * from filmdb." + "reservations" + " where reservationsId = (select max(reservationsId) from reservations);";
@@ -224,12 +234,12 @@ class MyThread extends Thread{
         System.out.println(sql);
         rs = stat.executeQuery(sql);
         int biggestId;
-        if(rs.next()){
+        if (rs.next()) {
             biggestId = rs.getInt("reservationsId") + 1;
-        }else{
+        } else {
             biggestId = 1;
         }
-        sql = "insert into filmdb." + "reservations" + " (reservationsId, idUser, tourId, totalPrice, date, status) values (\"" + biggestId + "\",\"" + s[1]+ "\",\"" + s[2]+ "\",\"" + s[3]+ "\",\"" + s[4]+ "\",\"" + s[5] + "\");";
+        sql = "insert into filmdb." + "reservations" + " (reservationsId, idUser, tourId, totalPrice, date, status) values (\"" + biggestId + "\",\"" + s[1] + "\",\"" + s[2] + "\",\"" + s[3] + "\",\"" + s[4] + "\",\"" + s[5] + "\");";
         System.out.println(sql);
         stat.executeUpdate(sql);
         dataOutputStream.writeBytes("Accepted" + "\n\r");
@@ -252,7 +262,7 @@ class MyThread extends Thread{
         ResultSet rs = stat.executeQuery(sql);
         String result = "";
         while (rs.next()) {
-            result += String.join("@", rs.getInt(1)+"", rs.getString(2), rs.getInt(3)+"", rs.getDate(4)+"", rs.getString(5));
+            result += String.join("@", rs.getInt(1) + "", rs.getString(2), rs.getInt(3) + "", rs.getDate(4) + "", rs.getString(5));
             result += "#";
         }
         dataOutputStream.writeBytes(result);
@@ -283,10 +293,30 @@ class MyThread extends Thread{
         rs.next();
         howMany = rs.getInt(1) / rs.getInt(2);
         System.out.println(rs.getInt(1) + " " + rs.getInt(2) + " " + howMany);
-        sql = "update filmdb.tours set availableTickets = " + (availableTickets + howMany) + " where (tourID = " + tourId + ");";
+        sql = "update filmdb.tours set availableTickets = " + (availableTickets + howMany) + " where (tourId = " + tourId + ");";
+        System.out.println(sql);
+        stat.executeUpdate(sql);
+        dataOutputStream.writeBytes("Accepted" + "\n\r");
+        dataOutputStream.flush();
+    }
+
+    public void getTourId(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
+        Statement stat = connection.createStatement();
+        String sql = "select tours.tourId from filmdb.tours join reservations on reservations.tourId = tours.tourId where reservations.reservationsId = " + s[1] + ";";
+        System.out.println(sql);
+        ResultSet rs = stat.executeQuery(sql);
+        rs.next();
+        int result = rs.getInt(1);
+        dataOutputStream.writeBytes(result + "");
+        dataOutputStream.flush();
+    }
+    public void changeToPayed(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
+        Statement stat = connection.createStatement();
+        String sql = "update filmdb.reservations set status = 'oplacone' where reservationsId = " + s[1] + ";";
         System.out.println(sql);
         stat.executeUpdate(sql);
         dataOutputStream.writeBytes("Accepted" + "\n\r");
         dataOutputStream.flush();
     }
 }
+
