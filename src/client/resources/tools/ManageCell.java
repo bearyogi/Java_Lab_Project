@@ -53,9 +53,9 @@ public class ManageCell extends ListCell<Reservation> {
 
         payButton.setOnAction(event -> {
             try {
+                if(!getItem().getStatus().equals("oplacone")) confirmPopup();
                 changeToPayed(getItem().getReservationId());
                 getAllReservations();
-                if(!getItem().getStatus().equals("oplacone")) confirmPopup();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -139,7 +139,7 @@ public class ManageCell extends ListCell<Reservation> {
     }
     public void confirmPopup() throws IOException {
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Potwierdzenie");
         alert.setHeaderText("Opłata");
         alert.setContentText("Dziękujemy za opłacenie rezerwacji o id: " + getItem().getReservationId() + "!");

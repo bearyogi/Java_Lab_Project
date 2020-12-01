@@ -257,7 +257,7 @@ class MyThread extends Thread {
 
     public void getAllReservations(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
         Statement stat = connection.createStatement();
-        String sql = "select reservationsId, tours.title, totalPrice, date, status from filmdb.reservations join tours on tours.tourId = reservations.tourId;";
+        String sql = "select reservationsId, tours.title, totalPrice, date, status from filmdb.reservations join tours on tours.tourId = reservations.tourId where reservations.idUser = " + s[1] + ";";
         System.out.println(sql);
         ResultSet rs = stat.executeQuery(sql);
         String result = "";
