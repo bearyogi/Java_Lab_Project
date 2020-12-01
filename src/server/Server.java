@@ -79,6 +79,20 @@ class MyThread extends Thread{
                         case "getTour":
                             getTour(dataOutputStream,s);
                             break;
+                        case "changeAvailableTickets":
+                            changeAvailableTickets(dataOutputStream,s);
+                            break;
+                        case "makeReservation":
+                            makeReservationQuery(dataOutputStream,s);
+                            break;
+                        case "deleteReservation":
+                            deleteReservation(dataOutputStream,s);
+                            break;
+                        case "getAllReservations":
+                            getAllReservations(dataOutputStream,s);
+                            break;
+                        case "giveBack":
+                            giveBackToTour(dataOutputStream,s);
                         default:
                             dataOutputStream.writeBytes(line + "\n\r");
                             dataOutputStream.flush();
@@ -165,7 +179,7 @@ class MyThread extends Thread{
         ResultSet rs = stat.executeQuery(sql);
 
         if (rs.next()) {
-            dataOutputStream.writeBytes(rs.getString("userLogin") + " " +rs.getString("userPassword") + " " + rs.getString("userName") + " " + rs.getString("userSurname") +" " + rs.getString("userEmail") + "\n\r");
+            dataOutputStream.writeBytes(rs.getInt("idUser") + " " + rs.getString("userLogin") + " " +rs.getString("userPassword") + " " + rs.getString("userName") + " " + rs.getString("userSurname") +" " + rs.getString("userEmail") + "\n\r");
             dataOutputStream.flush();
         }
     }
@@ -185,9 +199,94 @@ class MyThread extends Thread{
             dataOutputStream.writeBytes(  "Accepted"+ "\n\r");
         }
         dataOutputStream.flush();
-
-
     }
 
+    public void changeAvailableTickets(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
+        Statement stat = connection.createStatement();
 
+        String sql = "select * from filmdb." + "tours" + " where tourId = " + s[1] + ";";
+        System.out.println(sql);
+        ResultSet rs = stat.executeQuery(sql);
+        if(!rs.next()){
+            dataOutputStream.writeBytes(  "Rejected"+ "\n\r");
+        }else{
+            sql = "update filmdb.tours set availableTickets = " + "\"" + s[2] + "\""  + " where (tourId = " + s[1] + ");";
+            System.out.println(sql);
+            stat.executeUpdate(sql);
+            dataOutputStream.writeBytes(  "Accepted"+ "\n\r");
+        }
+        dataOutputStream.flush();
+    }
+    public void makeReservationQuery(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
+        Statement stat = connection.createStatement();
+        String sql = "select * from filmdb." + "reservations" + " where reservationsId = (select max(reservationsId) from reservations);";
+        ResultSet rs;
+        System.out.println(sql);
+        rs = stat.executeQuery(sql);
+        int biggestId;
+        if(rs.next()){
+            biggestId = rs.getInt("reservationsId") + 1;
+        }else{
+            biggestId = 1;
+        }
+        sql = "insert into filmdb." + "reservations" + " (reservationsId, idUser, tourId, totalPrice, date, status) values (\"" + biggestId + "\",\"" + s[1]+ "\",\"" + s[2]+ "\",\"" + s[3]+ "\",\"" + s[4]+ "\",\"" + s[5] + "\");";
+        System.out.println(sql);
+        stat.executeUpdate(sql);
+        dataOutputStream.writeBytes("Accepted" + "\n\r");
+        dataOutputStream.flush();
+    }
+
+    public void deleteReservation(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
+        Statement stat = connection.createStatement();
+        String sql = "delete from filmdb." + "reservations" + " where reservationsId = " + s[1] + ";";
+        System.out.println(sql);
+        stat.executeUpdate(sql);
+        dataOutputStream.writeBytes("Accepted" + "\n\r");
+        dataOutputStream.flush();
+    }
+
+    public void getAllReservations(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
+        Statement stat = connection.createStatement();
+        String sql = "select reservationsId, tours.title, totalPrice, date, status from filmdb.reservations join tours on tours.tourId = reservations.tourId;";
+        System.out.println(sql);
+        ResultSet rs = stat.executeQuery(sql);
+        String result = "";
+        while (rs.next()) {
+            result += String.join("@", rs.getInt(1)+"", rs.getString(2), rs.getInt(3)+"", rs.getDate(4)+"", rs.getString(5));
+            result += "#";
+        }
+        dataOutputStream.writeBytes(result);
+        dataOutputStream.flush();
+    }
+
+    public void giveBackToTour(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
+        int tourId;
+        int availableTickets;
+        int howMany;
+        Statement stat = connection.createStatement();
+
+        String sql = "select tourId from filmdb." + "reservations" + " where reservationsId = " + s[1] + ";";
+        System.out.println(sql);
+        ResultSet rs = stat.executeQuery(sql);
+        rs.next();
+        tourId = rs.getInt(1);
+
+        sql = "select availableTickets from filmdb.tours where tourId = " + tourId + ";";
+        System.out.println(sql);
+        rs = stat.executeQuery(sql);
+        rs.next();
+        availableTickets = rs.getInt(1);
+
+        sql = "select totalPrice, tours.price from reservations join tours on reservations.tourId = tours.tourId where reservations.reservationsId = " + s[1] + ";";
+        System.out.println(sql);
+        rs = stat.executeQuery(sql);
+        rs.next();
+        howMany = rs.getInt(1) / rs.getInt(2);
+        System.out.println(rs.getInt(1) + " " + rs.getInt(2) + " " + howMany);
+        sql = "update filmdb.tours set availableTickets = " + (availableTickets + howMany) + " where (tourID = " + tourId + ");";
+        System.out.println(sql);
+        stat.executeUpdate(sql);
+        dataOutputStream.writeBytes("Accepted" + "\n\r");
+        dataOutputStream.flush();
+    }
 }

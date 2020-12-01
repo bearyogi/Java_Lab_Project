@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -29,6 +30,7 @@
                         <Font size="19.0" />
                     </font>
                 </Button>
+            <ListView fx:id="removeList" layoutY="69.0" onMouseClicked="#confirmPopup" prefHeight="553.0" prefWidth="1028.0" style="-fx-background-color: #353238;" stylesheets="@../css-files/listViewcss.css" />
             </children></AnchorPane>
       <Label fx:id="clockLabel" layoutX="237.0" layoutY="-1.0" textFill="WHITE">
          <font>

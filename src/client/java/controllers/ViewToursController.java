@@ -123,6 +123,7 @@ public class ViewToursController {
         gridPane.getChildren().addAll(picture);
 
         picture.setOnMouseClicked(e -> {
+            Main.getTour().setId(Integer.parseInt(s[0]));
             Main.getTour().setTitle(s[1]);
             Main.getTour().setText(s[2]);
             Main.getTour().setDistance(Integer.parseInt(s[3]));

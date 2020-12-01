@@ -1,6 +1,7 @@
 package client.resources.tools;
 
 public class Tour {
+    private int id;
     private String image;
     private String title;
     private String text;
@@ -63,5 +64,12 @@ public class Tour {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    public int getId(){
+        return id;
     }
 }

@@ -1,6 +1,7 @@
 package client.resources.tools;
 
 public class User {
+    private int id;
     private String name;
     private String surname;
     private String email;
@@ -26,6 +27,9 @@ public class User {
     public String getSurname() {
         return surname;
     }
+    public int getId(){
+        return id;
+    }
 
     public void setEmail(String email) {
         this.email = email;
@@ -45,5 +49,8 @@ public class User {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 }

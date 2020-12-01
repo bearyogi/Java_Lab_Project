@@ -42,7 +42,6 @@ static Tour activeTour;
 
         InputStreamReader in = new InputStreamReader(s.getInputStream());
         BufferedReader bf = new BufferedReader(in);
-
         String str = bf.readLine();
         System.out.println("server : " + str);
         launch(args);
