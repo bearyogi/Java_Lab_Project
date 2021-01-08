@@ -1,4 +1,4 @@
 # Java_Lab_Project
-Java client-server application for 3rd year university laboratory.
+Java client-server application for 3rd year university lessons.
 
 Working on task - Michał Mamla
