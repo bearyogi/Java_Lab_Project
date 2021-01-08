@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #CACACA;" styleClass="bodybg" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.java.controllers.ViewAllClientsController">
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #CACACA;" styleClass="bodybg" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.java.controllers.ViewReservationsControllerAdmin">
     <Label layoutY="-2.0" prefHeight="49.0" prefWidth="1028.0" style="-fx-background-color: #525252;" text=" Widok pracownika" textFill="WHITE">
         <font>
             <Font size="36.0" />
@@ -31,7 +31,7 @@
             </Button>
             <ListView fx:id="manageList" layoutY="79.0" prefHeight="552.0" prefWidth="1017.0" style="-fx-background-color: #353238;" stylesheets="@../css-files/listViewcss.css" />
         </children></AnchorPane>
-    <Label fx:id="clockLabel" layoutX="316.0" layoutY="-1.0" prefHeight="53.0" prefWidth="164.0" textFill="WHITE">
+    <Label fx:id="clockLabel" layoutX="311.0" layoutY="-1.0" prefHeight="53.0" prefWidth="173.0" textFill="WHITE">
         <font>
             <Font size="36.0" />
         </font>

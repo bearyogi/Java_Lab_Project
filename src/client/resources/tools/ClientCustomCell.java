@@ -138,8 +138,8 @@ public class ClientCustomCell extends ListCell<Client> {
         BufferedReader bf = new BufferedReader(in);
         String str = bf.readLine();
         String[] all = str.split("#");
-        for(String reservation: all){
-            String[] one = reservation.split("@");
+        for(String client: all){
+            String[] one = client.split("@");
             Client listClient = new Client(Integer.parseInt(one[0]),one[1],one[2],one[3],one[4]);
             list.add(listClient);
 

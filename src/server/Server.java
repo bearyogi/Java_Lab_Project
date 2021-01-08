@@ -96,6 +96,9 @@ class MyThread extends Thread {
                         case "getAllReservations":
                             getAllReservations(dataOutputStream, s);
                             break;
+                        case "getAllReservationsTour":
+                            getAllReservationsTour(dataOutputStream, s);
+                            break;
                         case "giveBack":
                             giveBackToTour(dataOutputStream, s);
                             break;
@@ -283,6 +286,9 @@ class MyThread extends Thread {
         String sql = "delete from filmdb.users where idUser = " + s[1] + ";";
         System.out.println(sql);
         stat.executeUpdate(sql);
+        sql = "delete from filmdb.reservations where idUser =" + s[1] + ";";
+        System.out.println(sql);
+        stat.executeUpdate(sql);
         dataOutputStream.writeBytes("Accepted" + "\n\r");
         dataOutputStream.flush();
     }
@@ -300,6 +306,20 @@ class MyThread extends Thread {
         dataOutputStream.writeBytes(result);
         dataOutputStream.flush();
     }
+    public void getAllReservationsTour(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
+        Statement stat = connection.createStatement();
+        String sql = "select reservationsId,users.userSurname,totalPrice,date,status from reservations join users on reservations.idUser = users.idUser where tourId = " + s[1];
+        System.out.println(sql);
+        ResultSet rs = stat.executeQuery(sql);
+        String result = "";
+        while (rs.next()) {
+            result += String.join("@", rs.getInt(1) + "", rs.getString(2), rs.getInt(3) + "", rs.getDate(4) + "", rs.getString(5));
+            result += "#";
+        }
+        dataOutputStream.writeBytes(result);
+        dataOutputStream.flush();
+    }
+
 
     public void giveBackToTour(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
         int tourId;
