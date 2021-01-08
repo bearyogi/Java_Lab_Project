@@ -90,6 +90,9 @@ class MyThread extends Thread {
                         case "deleteReservation":
                             deleteReservation(dataOutputStream, s);
                             break;
+                        case "deleteClient":
+                            deleteClient(dataOutputStream, s);
+                            break;
                         case "getAllReservations":
                             getAllReservations(dataOutputStream, s);
                             break;
@@ -99,8 +102,17 @@ class MyThread extends Thread {
                         case "getTourId":
                             getTourId(dataOutputStream, s);
                             break;
+                        case "getClientId":
+                            getClientId(dataOutputStream, s);
+                            break;
+                        case "getClientById":
+                            getClientById(dataOutputStream, s);
+                            break;
                         case "changeToPayed":
                             changeToPayed(dataOutputStream, s);
+                            break;
+                        case "getAllClients":
+                            getAllClients(dataOutputStream, s);
                             break;
                         default:
                             dataOutputStream.writeBytes(line + "\n\r");
@@ -127,6 +139,18 @@ class MyThread extends Thread {
         ResultSet rs = stat.executeQuery(sql);
         if (rs.next()) {
             result = rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + " " + rs.getString(5) + " " + rs.getString(6) + " " + rs.getString(7) + " " + rs.getString(8);
+        }
+        dataOutputStream.writeBytes(result);
+        dataOutputStream.flush();
+    }
+    private void getClientById(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
+        Statement stat = connection.createStatement();
+        String result = "";
+        String sql = "select * from filmdb.users where idUser = " + s[1];
+        System.out.println(sql);
+        ResultSet rs = stat.executeQuery(sql);
+        if (rs.next()) {
+            result = rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + " " + rs.getString(5) + " " + rs.getString(6);
         }
         dataOutputStream.writeBytes(result);
         dataOutputStream.flush();
@@ -254,6 +278,14 @@ class MyThread extends Thread {
         dataOutputStream.writeBytes("Accepted" + "\n\r");
         dataOutputStream.flush();
     }
+    public void deleteClient(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
+        Statement stat = connection.createStatement();
+        String sql = "delete from filmdb.users where idUser = " + s[1] + ";";
+        System.out.println(sql);
+        stat.executeUpdate(sql);
+        dataOutputStream.writeBytes("Accepted" + "\n\r");
+        dataOutputStream.flush();
+    }
 
     public void getAllReservations(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
         Statement stat = connection.createStatement();
@@ -316,6 +348,20 @@ class MyThread extends Thread {
         System.out.println(sql);
         stat.executeUpdate(sql);
         dataOutputStream.writeBytes("Accepted" + "\n\r");
+        dataOutputStream.flush();
+    }
+
+    public void getAllClients(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
+        Statement stat = connection.createStatement();
+        String sql = "select * from filmdb.users";
+        System.out.println(sql);
+        ResultSet rs = stat.executeQuery(sql);
+        String result = "";
+        while (rs.next()) {
+            result += String.join("@", rs.getInt(1) + "", rs.getString(2), rs.getString(4) + "", rs.getString(5) + "", rs.getString(6));
+            result += "#";
+        }
+        dataOutputStream.writeBytes(result);
         dataOutputStream.flush();
     }
 }

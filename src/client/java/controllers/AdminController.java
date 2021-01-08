@@ -24,6 +24,21 @@ public class AdminController {
         SceneCreator.launchScene("../../resources/fxml-files/LogInScene.fxml",Main.getUser());
         shutdown();
     }
+    @FXML
+    public void addTourButton(MouseEvent event) throws IOException {
+        SceneCreator.launchScene("../../resources/fxml-files/ViewToursSceneAdmin.fxml",Main.getUser());
+        shutdown();
+    }
+    @FXML
+    public void viewReservationsButton(MouseEvent event) throws IOException {
+        SceneCreator.launchScene("../../resources/fxml-files/ViewTourAndReservationsSceneAdmin.fxml",Main.getUser());
+        shutdown();
+    }
+    @FXML
+    public void clientListButton(MouseEvent event) throws IOException {
+        SceneCreator.launchScene("../../resources/fxml-files/ViewALlClientsScene.fxml",Main.getUser());
+        shutdown();
+    }
     public void shutdown(){
         clk.terminate();
     }
