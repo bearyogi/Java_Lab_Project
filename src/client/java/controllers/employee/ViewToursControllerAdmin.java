@@ -106,7 +106,6 @@ public class ViewToursControllerAdmin {
     }
         Main.getTour().setId(0);
     }
-
     public void shutdown(){
         clk.terminate();
     }
@@ -158,7 +157,6 @@ public class ViewToursControllerAdmin {
         picture.setId(s[0]);
         hBox.getChildren().add(picture);
         GridPane.setConstraints(picture, columnNumber, rowNumber, 1,1, HPos.CENTER, VPos.CENTER);
-        gridPane.getChildren().addAll(picture);
 
         picture.setOnMouseClicked(e -> {
             Main.getTour().setId(Integer.parseInt(s[0]));

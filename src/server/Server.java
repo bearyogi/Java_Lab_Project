@@ -75,6 +75,9 @@ class MyThread extends Thread {
                         case "changeUserData":
                             changeUserDataQuery(dataOutputStream, s);
                             break;
+                        case "changeTourData":
+                            changeTourData(dataOutputStream, s);
+                            break;
                         case "getToursNumber":
                             getToursNumber(dataOutputStream, s);
                             break;
@@ -136,6 +139,21 @@ class MyThread extends Thread {
         }
 
     }
+    public void changeTourData(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
+        Statement stat = connection.createStatement();
+
+
+            String sql = "update filmdb.tours set title = " + "\"" + s[2] + "\"," +
+                    " text = \"" + s[3] + "\", distance = \"" + s[4] + "\"," +
+                    " days = \"" + s[5] + "\", price = \"" + s[6] + "\"," +
+                    " availableTickets = \"" + s[7] + "\", image = \"" + s[8] + "\"" + " where (tourId = \"" + s[1] + "\");";
+            System.out.println(sql);
+            stat.executeUpdate(sql);
+            dataOutputStream.writeBytes("Accepted" + "\n\r");
+
+        dataOutputStream.flush();
+    }
+
     public void deleteTour(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
 
         Statement stat = connection.createStatement();
