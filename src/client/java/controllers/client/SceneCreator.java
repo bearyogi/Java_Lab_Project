@@ -1,10 +1,10 @@
-package client.java.controllers;
-
-import java.io.IOException;
+package client.java.controllers.client;
 
 import client.resources.tools.User;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+
+import java.io.IOException;
 
 public class SceneCreator {
 

@@ -1,4 +1,4 @@
-package client.java.controllers;
+package client.java.controllers.client;
 
 import client.resources.tools.Reservation;
 import javafx.collections.FXCollections;
@@ -40,12 +40,12 @@ public class RemoveReservationController {
     }
     @FXML
     public void logOutButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("../../resources/fxml-files/LogInScene.fxml",Main.getUser());
+        SceneCreator.launchScene("../../../resources/fxml-files/LogInScene.fxml",Main.getUser());
         shutdown();
     }
     @FXML
     public void goBackButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("../../resources/fxml-files/UserScene.fxml",Main.getUser());
+        SceneCreator.launchScene("../../../resources/fxml-files/UserScene.fxml",Main.getUser());
         shutdown();
     }
 

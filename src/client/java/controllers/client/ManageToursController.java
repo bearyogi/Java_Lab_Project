@@ -1,4 +1,4 @@
-package client.java.controllers;
+package client.java.controllers.client;
 
 import client.resources.tools.ManageCell;
 import client.resources.tools.Reservation;
@@ -14,9 +14,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.Optional;
-
-import static java.util.Objects.isNull;
 
 public class ManageToursController {
     @FXML
@@ -38,11 +35,11 @@ public class ManageToursController {
 
     }
     public void goBackButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("../../resources/fxml-files/UserScene.fxml",Main.getUser());
+        SceneCreator.launchScene("../../../resources/fxml-files/UserScene.fxml",Main.getUser());
         shutdown();
     }
     public void logOutButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("../../resources/fxml-files/LogInScene.fxml",Main.getUser());
+        SceneCreator.launchScene("../../../resources/fxml-files/LogInScene.fxml",Main.getUser());
         shutdown();
     }
     public void shutdown(){

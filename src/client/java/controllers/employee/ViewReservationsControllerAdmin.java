@@ -1,5 +1,7 @@
-package client.java.controllers;
+package client.java.controllers.employee;
 
+import client.java.controllers.client.Main;
+import client.java.controllers.client.SceneCreator;
 import client.resources.tools.Clock;
 import client.resources.tools.Reservation;
 import client.resources.tools.ReservationCustomCell;
@@ -34,11 +36,11 @@ public class ViewReservationsControllerAdmin {
         getAllReservations();
     }
     public void goBackButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("../../resources/fxml-files/ViewTourAndReservationsSceneAdmin.fxml",Main.getUser());
+        SceneCreator.launchScene("../../../resources/fxml-files/ViewTourAndReservationsSceneAdmin.fxml", Main.getUser());
         shutdown();
     }
     public void logOutButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("../../resources/fxml-files/LogInScene.fxml",Main.getUser());
+        SceneCreator.launchScene("../../../resources/fxml-files/LogInScene.fxml",Main.getUser());
         shutdown();
     }
     public void getAllReservations() throws IOException {

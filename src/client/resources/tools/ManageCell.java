@@ -1,8 +1,7 @@
 package client.resources.tools;
 
-import client.java.controllers.Main;
-import client.java.controllers.ManageToursController;
-import client.java.controllers.SceneCreator;
+import client.java.controllers.client.Main;
+import client.java.controllers.client.SceneCreator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;

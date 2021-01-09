@@ -1,5 +1,7 @@
-package client.java.controllers;
+package client.java.controllers.employee;
 
+import client.java.controllers.client.Main;
+import client.java.controllers.client.SceneCreator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -13,7 +15,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class EditCredensialsController {
+public class EditCredensialsControllerAdmin {
 
     @FXML
     Label clockLabel;
@@ -52,7 +54,7 @@ public class EditCredensialsController {
         passwordLabel.setText(Main.getUser().getPassword());
     }
     public void logOutButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("../../resources/fxml-files/LogInScene.fxml",Main.getUser());
+        SceneCreator.launchScene("../../../resources/fxml-files/LogInScene.fxml",Main.getUser());
         shutdown();
     }
     public void confirmButton(MouseEvent event) throws IOException {
@@ -65,7 +67,13 @@ public class EditCredensialsController {
 
     }
     public void goBackButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("../../resources/fxml-files/UserScene.fxml",Main.getUser());
+        Main.getUser().setId(1);
+        Main.getUser().setName("");
+        Main.getUser().setSurname("");
+        Main.getUser().setNick("Admin");
+        Main.getUser().setEmail("");
+        Main.getUser().setPassword("");
+        SceneCreator.launchScene("../../../resources/fxml-files/AdminScene.fxml",Main.getUser());
         shutdown();
     }
     public void communicateWithServer() throws IOException {
@@ -79,10 +87,6 @@ public class EditCredensialsController {
         String str = bf.readLine();
         System.out.println("server : " + str);
         if (str.equals("Accepted")) {
-            Main.getUser().setEmail(emailInput.getText());
-            Main.getUser().setName(nameInput.getText());
-            Main.getUser().setSurname(surnameInput.getText());
-            Main.getUser().setPassword(passwordInput.getText());
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Potwierdzenie");
             alert.setHeaderText(null);
@@ -90,11 +94,17 @@ public class EditCredensialsController {
             alert.setX(750);
             alert.setY(384);
             alert.showAndWait();
-            SceneCreator.launchScene("../../resources/fxml-files/UserScene.fxml",Main.getUser());
+            Main.getUser().setId(1);
+            Main.getUser().setName("");
+            Main.getUser().setSurname("");
+            Main.getUser().setNick("Admin");
+            Main.getUser().setEmail("");
+            Main.getUser().setPassword("");
+            SceneCreator.launchScene("../../../resources/fxml-files/AdminScene.fxml",Main.getUser());
             shutdown();
-            }else{
-                errorLabel.setText("Wpisany adres e-mail jest już używany!");
-            }
+        }else{
+            errorLabel.setText("Wpisany adres e-mail jest już używany!");
+        }
     }
     public void shutdown(){
         clk.terminate();

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #353238;" styleClass="bodybg" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.java.controllers.ViewToursAndReservationsControllerAdmin">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #353238;" styleClass="bodybg" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.java.controllers.employee.ViewToursAndReservationsControllerAdmin">
     <children>
         <Label layoutY="-2.0" prefHeight="50.0" prefWidth="1028.0" style="-fx-background-color: #525252;" text=" Widok pracownika" textFill="WHITE">
             <font>

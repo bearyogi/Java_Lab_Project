@@ -1,6 +1,6 @@
 package client.resources.tools;
 
-import client.java.controllers.Main;
+import client.java.controllers.client.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;

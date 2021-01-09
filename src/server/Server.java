@@ -117,6 +117,9 @@ class MyThread extends Thread {
                         case "getAllClients":
                             getAllClients(dataOutputStream, s);
                             break;
+                        case "deleteTour":
+                            deleteTour(dataOutputStream, s);
+                            break;
                         default:
                             dataOutputStream.writeBytes(line + "\n\r");
                             dataOutputStream.flush();
@@ -132,6 +135,21 @@ class MyThread extends Thread {
             }
         }
 
+    }
+    public void deleteTour(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
+
+        Statement stat = connection.createStatement();
+        String sql = "delete from filmdb.tours where tourId = " + s[1] + ";";
+        System.out.println(sql);
+        stat.executeUpdate(sql);
+        sql = "delete from filmdb.reservations where tourId =" + s[1] + ";";
+        System.out.println(sql);
+        stat.executeUpdate(sql);
+        sql = "update tours set tourId = tourId - 1 where tourId > " + s[1] + ";";
+        System.out.println(sql);
+        stat.executeUpdate(sql);
+        dataOutputStream.writeBytes("Accepted" + "\n\r");
+        dataOutputStream.flush();
     }
 
     private void getTour(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {

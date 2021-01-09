@@ -1,4 +1,4 @@
-package client.java.controllers;
+package client.java.controllers.client;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,7 +17,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.sql.Date;
-import java.util.*;
 
 public class ViewOneTourController {
     @FXML
@@ -68,12 +67,12 @@ public class ViewOneTourController {
     }
     @FXML
     public void logOutButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("../../resources/fxml-files/LogInScene.fxml",Main.getUser());
+        SceneCreator.launchScene("../../../resources/fxml-files/LogInScene.fxml",Main.getUser());
         shutdown();
     }
     @FXML
     public void goBackButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("../../resources/fxml-files/ViewToursScene.fxml",Main.getUser());
+        SceneCreator.launchScene("../../../resources/fxml-files/ViewToursScene.fxml",Main.getUser());
         shutdown();
     }
     @FXML
@@ -81,7 +80,7 @@ public class ViewOneTourController {
         if((Integer)choiceBox.getValue() <= Main.getTour().getAvailableTickets()){
             changeAvailableTickets();
             makeReservation();
-            SceneCreator.launchScene("../../resources/fxml-files/UserScene.fxml",Main.getUser());
+            SceneCreator.launchScene("../../../resources/fxml-files/UserScene.fxml",Main.getUser());
             shutdown();
         }
         else {

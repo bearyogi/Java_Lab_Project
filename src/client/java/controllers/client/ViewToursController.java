@@ -1,4 +1,4 @@
-package client.java.controllers;
+package client.java.controllers.client;
 
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
@@ -68,12 +68,12 @@ public class ViewToursController {
     }
     @FXML
     public void logOutButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("../../resources/fxml-files/LogInScene.fxml",Main.getUser());
+        SceneCreator.launchScene("../../../resources/fxml-files/LogInScene.fxml",Main.getUser());
         shutdown();
     }
     @FXML
     public void goBackButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("../../resources/fxml-files/UserScene.fxml",Main.getUser());
+        SceneCreator.launchScene("../../../resources/fxml-files/UserScene.fxml",Main.getUser());
         shutdown();
     }
     public void shutdown(){
@@ -132,7 +132,7 @@ public class ViewToursController {
             Main.getTour().setAvailableTickets(Integer.parseInt(s[6]));
             Main.getTour().setImage(s[7]);
             try {
-                SceneCreator.launchScene("../../resources/fxml-files/ViewOneTourScene.fxml", Main.getUser());
+                SceneCreator.launchScene("../../../resources/fxml-files/ViewOneTourScene.fxml", Main.getUser());
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }

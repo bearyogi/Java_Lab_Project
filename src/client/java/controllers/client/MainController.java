@@ -1,5 +1,4 @@
-package client.java.controllers;
-import client.resources.tools.User;
+package client.java.controllers.client;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -30,7 +29,7 @@ public class MainController {
 
 
     public void registerButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("../../resources/fxml-files/RegisterScene.fxml", Main.getUser());
+        SceneCreator.launchScene("../../../resources/fxml-files/RegisterScene.fxml", Main.getUser());
     }
 
     public void communicateWithServer() throws IOException {
@@ -48,7 +47,7 @@ public class MainController {
         System.out.println("server : " + str);
         if (str.equals("Accepted")) {
             if(usernameBox.getText().equals("admin")){
-                SceneCreator.launchScene("../../resources/fxml-files/AdminScene.fxml",Main.getUser());
+                SceneCreator.launchScene("../../../resources/fxml-files/AdminScene.fxml",Main.getUser());
             }else{
                 String[] userData = askServerForUserData().split("\\s+");
                 Main.getUser().setId(Integer.parseInt(userData[0]));
@@ -57,7 +56,7 @@ public class MainController {
                 Main.getUser().setNick(userData[1]);
                 Main.getUser().setSurname(userData[4]);
                 Main.getUser().setPassword(userData[2]);
-                SceneCreator.launchScene("../../resources/fxml-files/UserScene.fxml",Main.getUser());
+                SceneCreator.launchScene("../../../resources/fxml-files/UserScene.fxml",Main.getUser());
             }
 
         } else {

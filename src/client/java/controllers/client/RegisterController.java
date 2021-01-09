@@ -1,24 +1,17 @@
-package client.java.controllers;
+package client.java.controllers.client;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Bounds;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.concurrent.TimeUnit;
 
 public class RegisterController {
 
@@ -50,7 +43,7 @@ public class RegisterController {
       }
     }
     public void goBackButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("../../resources/fxml-files/LogInScene.fxml",Main.getUser());
+        SceneCreator.launchScene("../../../resources/fxml-files/LogInScene.fxml",Main.getUser());
     }
 
   public void communicateWithServer() throws IOException {
@@ -76,7 +69,7 @@ public class RegisterController {
       alert.showAndWait();
 
 
-      SceneCreator.launchScene("../../resources/fxml-files/LogInScene.fxml",Main.getUser());
+      SceneCreator.launchScene("../../../resources/fxml-files/LogInScene.fxml",Main.getUser());
     } else {
       errorLabel.setText("Użytkownik o podanych danych (email,nick) już istnieje!");
     }
