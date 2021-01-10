@@ -45,7 +45,7 @@ public class ClientCustomCell extends ListCell<Client> {
             try {
                 getClientId(getItem().getIdUser());
                 getClientById(clientId);
-                SceneCreator.launchScene("../../resources/fxml-files/EditCredensialsSceneAdmin.fxml", Main.getUser());
+                SceneCreator.launchScene("../../../resources/fxml-files/EditCredensialsSceneAdmin.fxml", Main.getUser());
             } catch (IOException e) {
                 e.printStackTrace();
             }

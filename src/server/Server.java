@@ -123,6 +123,9 @@ class MyThread extends Thread {
                         case "deleteTour":
                             deleteTour(dataOutputStream, s);
                             break;
+                        case "addTour":
+                            addTour(dataOutputStream, s);
+                            break;
                         default:
                             dataOutputStream.writeBytes(line + "\n\r");
                             dataOutputStream.flush();
@@ -138,6 +141,23 @@ class MyThread extends Thread {
             }
         }
 
+    }
+
+
+    public void addTour(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
+        Statement stat = connection.createStatement();
+        String sql;
+        int biggestId;
+        sql = "select max(tourId) from filmdb.tours;";
+        ResultSet rs = stat.executeQuery(sql);
+        rs.next();
+        biggestId = Integer.parseInt(rs.getString(1)) + 1;
+
+         sql = "insert into filmdb." + "tours" + " (tourId, title, text, distance, days, price,availableTickets,image) values (\"" + biggestId + "\",\"" + s[1] + "\",\"" + s[2] + "\",\"" + s[3] + "\",\"" + s[4] + "\",\"" + s[5] + "\",\"" + s[6] + "\",\"" + s[7] + "\");";
+        System.out.println(sql);
+        stat.executeUpdate(sql);
+        dataOutputStream.writeBytes("Accepted" + "\n\r");
+        dataOutputStream.flush();
     }
     public void changeTourData(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
         Statement stat = connection.createStatement();
