@@ -3,18 +3,19 @@ package client.java.controllers.employee;
 import client.java.controllers.client.Main;
 import client.java.controllers.client.SceneCreator;
 import client.resources.tools.Clock;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import javax.imageio.ImageIO;
+import java.io.*;
 import java.net.Socket;
 
 public class AddTourController {
@@ -33,8 +34,6 @@ public class AddTourController {
     Label priceLabel;
     @FXML
     Label ticketLabel;
-    @FXML
-    Label imageLabel;
     @FXML
     TextField titleInput;
     @FXML
@@ -57,6 +56,8 @@ public class AddTourController {
     Clock clk;
     Thread th;
     Image image;
+    String imageName;
+    private File selectedImage;
     @FXML
     public void initialize(){
         clk = new Clock(clockLabel);
@@ -78,7 +79,7 @@ public class AddTourController {
         shutdown();
     }
     public void confirmButton(MouseEvent event) throws IOException {
-        if (titleInput.getText().isEmpty() || descInput.getText().isEmpty() || distanceInput.getText().isEmpty() || daysInput.getText().isEmpty()|| priceInput.getText().isEmpty() || ticketInput.getText().isEmpty() || imageInput.getText().isEmpty()){
+        if (titleInput.getText().isEmpty() || descInput.getText().isEmpty() || distanceInput.getText().isEmpty() || daysInput.getText().isEmpty()|| priceInput.getText().isEmpty() || ticketInput.getText().isEmpty()){
             errorLabel.setText("Należy wypełnić wszystkie tabele z danymi!");
         } else {
             communicateWithServer();
@@ -98,7 +99,7 @@ public class AddTourController {
     }
     public void communicateWithServer() throws IOException {
         String details = descInput.getText().replaceAll(" ","_");
-        String result = "addTour " + titleInput.getText() + " " + details + " " + distanceInput.getText() + " " + daysInput.getText() + " " + priceInput.getText() +  " " + ticketInput.getText()+ " " + imageInput.getText();
+        String result = "addTour " + titleInput.getText() + " " + details + " " + distanceInput.getText() + " " + daysInput.getText() + " " + priceInput.getText() +  " " + ticketInput.getText()+ " " + imageName;
         Socket s = new Socket("localhost", 4999);
         PrintWriter pr = new PrintWriter(s.getOutputStream());
         pr.println(result);
@@ -134,15 +135,27 @@ public class AddTourController {
     @FXML
     public void updateTicket(){ticketLabel.setText(ticketInput.getText());}
     @FXML
-    public void showImage(){
+    public void uploadImageButton() throws IOException {
 
-        try{
-            image = new Image("/client/resources/images/" + imageInput.getText() + ".jpg");
-        }catch (Exception e){
-            image = new Image("/client/resources/images/noImageIcon.jpg");
-        }
 
-    imageView.setImage(image);
+            FileChooser fc = new FileChooser();
+            fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Images(png,jpg)", "*.jpg", "*.png"));
+            selectedImage = fc.showOpenDialog(null);
+            if (selectedImage == null)
+                return;
+            else if (ImageIO.read(selectedImage) == null) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Załaduj plik w formacie JPG lub PNG!",
+                        ButtonType.OK);
+                alert.showAndWait();
+                if (alert.getResult() == ButtonType.OK) {
+                    return;
+                }
+            } else {
+                Image img = SwingFXUtils.toFXImage(ImageIO.read(selectedImage), null);
+                imageView.setImage(img);
+                imageName = selectedImage.getName();
+            }
+
     }
 
     public void shutdown(){
