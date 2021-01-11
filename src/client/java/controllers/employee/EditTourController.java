@@ -49,8 +49,6 @@ public class EditTourController {
     @FXML
     TextField ticketInput;
     @FXML
-    TextField imageInput;
-    @FXML
     Label errorLabel;
     @FXML
     ImageView imageView;
@@ -73,6 +71,24 @@ public class EditTourController {
         ticketLabel.setText(Main.getTour().getAvailableTickets()+"");
         image = new Image("/client/resources/images/" + Main.getTour().getImage());
         imageView.setImage(image);
+        imageName = Main.getTour().getImage();
+        titleInput.setText(Main.getTour().getTitle());
+        descInput.setText(Main.getTour().getText());
+        distanceInput.setText(Main.getTour().getDistance()+"");
+        daysInput.setText(Main.getTour().getDays()+"");
+        priceInput.setText(Main.getTour().getPrice()+"");
+        ticketInput.setText(Main.getTour().getAvailableTickets()+"");
+        restrictInput(distanceInput);
+        restrictInput(daysInput);
+        restrictInput(priceInput);
+        restrictInput(ticketInput);
+    }
+    public void restrictInput(TextField input){
+        input.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                input.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
     }
     public void logOutButton(MouseEvent event) throws IOException {
         SceneCreator.launchScene("../../../resources/fxml-files/LogInScene.fxml",Main.getUser());

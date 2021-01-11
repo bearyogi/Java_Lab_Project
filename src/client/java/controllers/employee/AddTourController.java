@@ -73,6 +73,17 @@ public class AddTourController {
         imageView.setFitHeight(250);
         image = new Image("/client/resources/images/noImageIcon.jpg");
         imageView.setImage(image);
+        restrictInput(distanceInput);
+        restrictInput(daysInput);
+        restrictInput(priceInput);
+        restrictInput(ticketInput);
+    }
+    public void restrictInput(TextField input){
+        input.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                input.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
     }
     public void logOutButton(MouseEvent event) throws IOException {
         SceneCreator.launchScene("../../../resources/fxml-files/LogInScene.fxml",Main.getUser());
