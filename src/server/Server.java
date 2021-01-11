@@ -15,15 +15,15 @@ public class Server {
         String host = "jdbc:mysql://localhost:3306/filmdb?serverTimezone=UTC&useUnicode=yes&characterEncoding=UTF-8";
         String userName = "root";
         String userPassword = "Minotaur21#";
-        Connection connection = DriverManager.getConnection(host,userName,userPassword);
+        Connection connection = DriverManager.getConnection(host, userName, userPassword);
 
         Socket socket;
         ServerSocket serverSocket = new ServerSocket(PORT);
         Semaphore semaphore = new Semaphore(1);
-       while(true){
-           socket = serverSocket.accept();
-           new MyThread(socket,connection,semaphore).start();
-       }
+        while (true) {
+            socket = serverSocket.accept();
+            new MyThread(socket, connection, semaphore).start();
+        }
 
     }
 }
@@ -418,6 +418,17 @@ class MyThread extends Thread {
         dataOutputStream.writeBytes(result + "");
         dataOutputStream.flush();
     }
+    public void getClientId(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
+        Statement stat = connection.createStatement();
+        String sql = "select idUser from filmdb.users where idUser = " + s[1];
+        System.out.println(sql);
+        ResultSet rs = stat.executeQuery(sql);
+        rs.next();
+        int result = rs.getInt(1);
+        dataOutputStream.writeBytes(result + "");
+        dataOutputStream.flush();
+    }
+
     public void changeToPayed(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
         Statement stat = connection.createStatement();
         String sql = "update filmdb.reservations set status = 'oplacone' where reservationsId = " + s[1] + ";";
