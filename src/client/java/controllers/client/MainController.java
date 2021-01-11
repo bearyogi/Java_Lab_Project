@@ -47,6 +47,13 @@ public class MainController {
         System.out.println("server : " + str);
         if (str.equals("Accepted")) {
             if(usernameBox.getText().equals("admin")){
+                String[] userData = askServerForUserData().split("\\s+");
+                Main.getUser().setId(Integer.parseInt(userData[0]));
+                Main.getUser().setEmail(userData[5]);
+                Main.getUser().setName(userData[3]);
+                Main.getUser().setNick(userData[1]);
+                Main.getUser().setSurname(userData[4]);
+                Main.getUser().setPassword(userData[2]);
                 SceneCreator.launchScene("../../../resources/fxml-files/AdminScene.fxml",Main.getUser());
             }else{
                 String[] userData = askServerForUserData().split("\\s+");

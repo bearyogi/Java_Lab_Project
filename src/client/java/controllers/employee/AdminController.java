@@ -12,7 +12,6 @@ import java.io.IOException;
 public class AdminController {
     @FXML
     Label clockLabel;
-
     Clock clk;
     Thread th;
     @FXML

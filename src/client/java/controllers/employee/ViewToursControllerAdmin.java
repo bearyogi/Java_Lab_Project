@@ -145,10 +145,12 @@ public class ViewToursControllerAdmin {
 
     public void addToGridPane(String tour, int columnNumber, int rowNumber){
         String[] s = tour.split("\\s+");
-        if(s[7].equals("null"))
-            image = new Image("/client/resources/images/noImageIcon.jpg");
-        else
-            image = new Image("/client/resources/images/" + s[7] + ".jpg");
+            try{
+                image = new Image("/client/resources/images/" + s[7]);
+            }catch (IllegalArgumentException e){
+                image = new Image("/client/resources/images/noImageIcon.jpg");
+            }
+
 
         picture = new ImageView();
         picture.setFitWidth(230);

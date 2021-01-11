@@ -56,11 +56,14 @@ public class ViewOneTourController {
         priceLabel.setText("Cena na 1 osobę: "+Main.getTour().getPrice()+" zł");
         availableLabel.setText("Ilość wolnych miejsc: " + Main.getTour().getAvailableTickets()+"");
         distanceLabel.setText("Przebyta trasa: "+Main.getTour().getDistance()+" km");
-        if(Main.getTour().getImage().equals("null"))
+        try{
+            image = new Image("/client/resources/images/" + Main.getTour().getImage());
+        }catch (IllegalArgumentException e){
             image = new Image("/client/resources/images/noImageIcon.jpg");
-        else
-            image = new Image("/client/resources/images/" + Main.getTour().getImage() + ".jpg");
-        imageView.setFitWidth(400);
+        }
+
+        imageView.setFitWidth(300);
+        //imageView.setFitHeight(300);
         imageView.setImage(image);
         choiceBox.setItems(choiceBoxList);
         choiceBox.setValue(1);

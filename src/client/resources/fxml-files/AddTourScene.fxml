@@ -93,17 +93,17 @@
                         <Font size="15.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="imageInput" layoutX="21.0" layoutY="248.0" onKeyPressed="#showImage" onKeyReleased="#showImage" prefHeight="31.0" prefWidth="223.0" promptText="Wprowadź nową nazwę zdjęcia" style="-fx-background-color: #525252;">
-                    <font>
-                        <Font size="15.0" />
-                    </font>
-                </TextField>
                 <Label fx:id="ticketLabel" layoutX="760.0" layoutY="158.0" prefHeight="36.0" prefWidth="223.0" text="Ilość biletów" textFill="WHITE">
                     <font>
                         <Font size="15.0" />
                     </font>
                 </Label>
             <ImageView fx:id="imageView" fitHeight="237.0" fitWidth="216.0" layoutX="534.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="uploadImageButton" layoutX="21.0" layoutY="246.0" mnemonicParsing="false" onMouseClicked="#uploadImageButton" prefHeight="21.0" prefWidth="223.0" style="-fx-background-color: #68adcb; -fx-opacity: 70%;" text="Załaduj zdjęcie" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
             </children></AnchorPane>
         <Line endX="514.0" endY="51.0" startX="514.0" startY="590.0" stroke="#908a8a" />
         <Label fx:id="clockLabel" layoutX="315.0" layoutY="-2.0" prefHeight="53.0" prefWidth="164.0" textFill="WHITE">
