@@ -1,4 +1,4 @@
-# Java_Lab_Project
+# Travel Agency Application
 Java client-server application for 3rd year university lessons.
 
-Working on task - Michał Mamla
+- Working on task - Michał Mamla
