@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.concurrent.Semaphore;
 
 public class Server {
@@ -12,7 +13,7 @@ public class Server {
 
     public static void main(String[] args) throws IOException, SQLException {
 
-        String host = "jdbc:mysql://localhost:3306/filmdb?serverTimezone=UTC&useUnicode=yes&characterEncoding=UTF-8";
+         String host = "jdbc:mysql://localhost:3306/filmdb?serverTimezone=UTC&useUnicode=yes&characterEncoding=UTF-8";
         String userName = "root";
         String userPassword = "Minotaur21#";
         Connection connection = DriverManager.getConnection(host, userName, userPassword);
@@ -20,6 +21,41 @@ public class Server {
         Socket socket;
         ServerSocket serverSocket = new ServerSocket(PORT);
         Semaphore semaphore = new Semaphore(1);
+
+        Statement stat = connection.createStatement();
+        String sql = "";
+        String resId = "";
+        String tourId = "";
+        String nowString = LocalDate.now().toString();
+        System.out.println(nowString);
+        sql = "update filmdb.reservations set status = 'doOddania' where status = 'doZaplaty' and date < '" + nowString + "';";
+        System.out.println(sql);
+        stat.executeUpdate(sql);
+        sql = "select reservations.reservationsId, tours.tourId from reservations join tours on reservations.tourId = tours.tourId where reservations.status = 'doOddania';";
+        ResultSet rs = stat.executeQuery(sql);
+        while(rs.next()){
+            resId += rs.getString(1) + " ";
+            tourId += rs.getString(2) + " ";
+        }
+        String[] resIdArr = resId.split(" ");
+        String[] tourIdArr = tourId.split(" ");
+        for(int i=0;i<resIdArr.length;i++){
+            if(resIdArr[i] != ""){
+                sql = "select totalPrice, tours.price from reservations join tours on reservations.tourId = tours.tourId where reservations.reservationsId = " + resIdArr[i] + ";";
+                System.out.println(sql);
+                rs = stat.executeQuery(sql);
+                rs.next();
+                int howMany = rs.getInt(1) / rs.getInt(2);
+                sql = "update filmdb.tours set availableTickets = availableTickets + " + howMany + " where tourId = " + tourIdArr[i] + ";";
+                stat.executeUpdate(sql);
+            }
+
+
+        }
+        sql = "update filmdb.reservations set status = 'anulowane' where status = 'doOddania';";
+        System.out.println(sql);
+        stat.executeUpdate(sql);
+
         while (true) {
             socket = serverSocket.accept();
             new MyThread(socket, connection, semaphore).start();
@@ -440,7 +476,7 @@ class MyThread extends Thread {
 
     public void getAllClients(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
         Statement stat = connection.createStatement();
-        String sql = "select * from filmdb.users";
+        String sql = "select * from filmdb.users where idUser > 1";
         System.out.println(sql);
         ResultSet rs = stat.executeQuery(sql);
         String result = "";

@@ -52,9 +52,12 @@ public class ManageCell extends ListCell<Reservation> {
 
         payButton.setOnAction(event -> {
             try {
-                if(!getItem().getStatus().equals("oplacone")) confirmPopup();
-                changeToPayed(getItem().getReservationId());
-                getAllReservations();
+                if(getItem().getStatus().equals("doZaplaty")){
+                    confirmPopup();
+                    changeToPayed(getItem().getReservationId());
+                    getAllReservations();
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
