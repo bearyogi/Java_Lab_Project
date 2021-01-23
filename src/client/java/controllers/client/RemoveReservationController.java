@@ -82,11 +82,13 @@ public class RemoveReservationController {
         InputStreamReader in = new InputStreamReader(s.getInputStream());
         BufferedReader bf = new BufferedReader(in);
         String str = bf.readLine();
-        String[] all = str.split("#");
-        for(String reservation: all){
-            String[] one = reservation.split("@");
-            Reservation listReservation = new Reservation(Integer.parseInt(one[0]),one[1],Integer.parseInt(one[2]),one[3],one[4]);
-            list.add(listReservation);
+        if(str != null) {
+            String[] all = str.split("#");
+            for (String reservation : all) {
+                String[] one = reservation.split("@");
+                Reservation listReservation = new Reservation(Integer.parseInt(one[0]), one[1], Integer.parseInt(one[2]), one[3], one[4]);
+                list.add(listReservation);
+            }
         }
         this.removeList.setItems(list);
     }

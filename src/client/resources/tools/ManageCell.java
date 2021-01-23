@@ -44,7 +44,7 @@ public class ManageCell extends ListCell<Reservation> {
             try {
                 getTourId(getItem().getReservationId());
                 getTourFromServer(tourId);
-                SceneCreator.launchScene("../../resources/fxml-files/ViewOneTourScene.fxml", Main.getUser());
+                SceneCreator.launchScene("../../../resources/fxml-files/ViewOneTourScene.fxml", Main.getUser());
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -136,8 +136,10 @@ public class ViewToursAndReservationsControllerAdmin {
             Main.getTour().setImage(s[7]);
             try {
                 SceneCreator.launchScene("../../../resources/fxml-files/ViewReservationsSceneAdmin.fxml", Main.getUser());
-            } catch (IOException ioException) {
+            } catch (IOException  ioException) {
                 ioException.printStackTrace();
+            } catch (NullPointerException n){
+                System.out.println(e);
             }
         });
     }

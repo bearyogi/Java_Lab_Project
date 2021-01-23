@@ -141,6 +141,9 @@ class MyThread extends Thread {
                         case "giveBack":
                             giveBackToTour(dataOutputStream, s);
                             break;
+                        case "countUserTours":
+                            countUserTours(dataOutputStream,s);
+                            break;
                         case "getTourId":
                             getTourId(dataOutputStream, s);
                             break;
@@ -213,12 +216,14 @@ class MyThread extends Thread {
     public void deleteTour(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
 
         Statement stat = connection.createStatement();
-        String sql = "delete from filmdb.tours where tourId = " + s[1] + ";";
+        String sql = "delete from filmdb.reservations where tourId =" + s[1] + ";";
         System.out.println(sql);
         stat.executeUpdate(sql);
-        sql = "delete from filmdb.reservations where tourId =" + s[1] + ";";
+
+        sql = "delete from filmdb.tours where tourId = " + s[1] + ";";
         System.out.println(sql);
         stat.executeUpdate(sql);
+
         sql = "update tours set tourId = tourId - 1 where tourId > " + s[1] + ";";
         System.out.println(sql);
         stat.executeUpdate(sql);
@@ -251,7 +256,7 @@ class MyThread extends Thread {
         dataOutputStream.flush();
     }
 
-    private void getToursNumber(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
+    public void getToursNumber(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
         Statement stat = connection.createStatement();
         String result = "";
         String sql = "select count(*) as number from filmdb.tours";
@@ -263,7 +268,18 @@ class MyThread extends Thread {
         dataOutputStream.writeBytes(result);
         dataOutputStream.flush();
     }
-
+    public void countUserTours(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException{
+        Statement stat = connection.createStatement();
+        String result = "";
+        String sql = "select count(*) as number from filmdb.reservations where idUser = " + s[1];
+        System.out.println(sql);
+        ResultSet rs = stat.executeQuery(sql);
+        if (rs.next()) {
+            result = rs.getString(1);
+        }
+        dataOutputStream.writeBytes(result);
+        dataOutputStream.flush();
+    }
     public void makeLoginQuery(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
         Statement stat = connection.createStatement();
         String sql = "select * from filmdb." + s[0] + " where userLogin = '" + s[1] + "' and userPassword = '" + s[2] + "'";
@@ -375,10 +391,12 @@ class MyThread extends Thread {
     }
     public void deleteClient(DataOutputStream dataOutputStream, String[] s) throws SQLException, IOException {
         Statement stat = connection.createStatement();
-        String sql = "delete from filmdb.users where idUser = " + s[1] + ";";
+
+        String sql = "delete from filmdb.reservations where idUser =" + s[1] + ";";
         System.out.println(sql);
         stat.executeUpdate(sql);
-        sql = "delete from filmdb.reservations where idUser =" + s[1] + ";";
+
+        sql = "delete from filmdb.users where idUser = " + s[1] + ";";
         System.out.println(sql);
         stat.executeUpdate(sql);
         dataOutputStream.writeBytes("Accepted" + "\n\r");

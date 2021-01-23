@@ -83,7 +83,7 @@
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label layoutX="12.0" layoutY="526.0" prefHeight="36.0" prefWidth="242.0" text="Ilość wycieczek:" textFill="#b5b5b5">
+            <Label layoutX="12.0" layoutY="526.0" prefHeight="36.0" prefWidth="242.0" text="Ilość rezerwacji:" textFill="#b5b5b5">
                <font>
                   <Font size="17.0" />
                </font>

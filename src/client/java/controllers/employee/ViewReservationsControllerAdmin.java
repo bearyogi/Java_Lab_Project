@@ -52,8 +52,7 @@ public class ViewReservationsControllerAdmin {
         InputStreamReader in = new InputStreamReader(s.getInputStream());
         BufferedReader bf = new BufferedReader(in);
         String str = bf.readLine();
-
-        try {
+        if(str != null){
             String[] all = str.split("#");
             for (String reservation : all) {
                 String[] one = reservation.split("@");
@@ -61,11 +60,11 @@ public class ViewReservationsControllerAdmin {
                 list.add(listReservation);
 
             }
+        }
+
             this.manageList.setItems(list);
             manageList.setCellFactory(param -> new ReservationCustomCell());
-        }catch(NullPointerException e){
-            e.printStackTrace();
-        }
+
 
     }
 
