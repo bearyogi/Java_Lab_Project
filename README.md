@@ -5,6 +5,14 @@ Java client-server application for 3rd year university lessons.
 
 
 ## Prerequirements
+### Techstack:
+- JDK 11
+- Maven
+- JavaFX
+- MySQL 
+- Lombok
+- TestNG
+
 ### Database
 Create database 'filmdb' via MySql CMD on your localhost and make sure it has all priviliges.
 
