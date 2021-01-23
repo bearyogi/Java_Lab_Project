@@ -11,7 +11,7 @@ public class ContactController {
     @FXML
     Label clockLabel;
 
-    Clock clk;
+    public Clock clk;
     Thread th;
     @FXML
     public void initialize(){

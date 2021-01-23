@@ -77,4 +77,6 @@ public class Main extends Application {
     public static Tour getTour() {
         return Main.activeTour;
     }
+
+    public static void setTour(Tour tour) {Main.activeTour = tour;}
 }
