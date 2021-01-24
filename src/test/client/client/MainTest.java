@@ -48,6 +48,15 @@ public class MainTest {
         //then
         assertEquals(tour,main.getTour(),"Should set and get tour properly,but did not.");
     }
+    @Test
+    public void shouldSetCorrectRoot(){
+        //given
+        Object expected;
+        //when
+        expected = getClass().getResource("../../../resources/fxml-files/LogInScene.fxml");
+        //then
+        assertEquals(main.getRoot(),expected,"Should load correct root, but did not.");
+    }
 
 
     @BeforeTest
