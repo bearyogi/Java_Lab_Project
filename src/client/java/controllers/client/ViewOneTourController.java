@@ -9,7 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import client.resources.tools.Clock;
+import client.java.controllers.tools.Clock;
 
 import java.io.BufferedReader;
 import java.io.IOException;

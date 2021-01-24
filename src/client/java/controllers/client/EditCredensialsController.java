@@ -5,7 +5,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import client.resources.tools.Clock;
+import client.java.controllers.tools.Clock;
 
 import java.io.BufferedReader;
 import java.io.IOException;

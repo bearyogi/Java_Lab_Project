@@ -17,7 +17,7 @@ public class MainController {
     @FXML
     PasswordField passwordBox;
     @FXML
-     Label errorLabel;
+    public Label errorLabel;
     @FXML
     public void loginButton(MouseEvent event) throws IOException {
         if(!usernameBox.getText().isEmpty() && !passwordBox.getText().isEmpty()) {

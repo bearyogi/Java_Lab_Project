@@ -1,4 +1,4 @@
-package client.resources.tools;
+package client.java.controllers.tools;
 import javafx.scene.control.Label;
 import javafx.application.Platform;
 import java.time.LocalTime;

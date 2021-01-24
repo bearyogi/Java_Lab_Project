@@ -1,13 +1,13 @@
 package client.java.controllers.client;
 
-import client.resources.tools.ManageCell;
-import client.resources.tools.Reservation;
+import client.java.controllers.tools.ManageCell;
+import client.java.controllers.tools.Reservation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import client.resources.tools.Clock;
+import client.java.controllers.tools.Clock;
 
 import java.io.BufferedReader;
 import java.io.IOException;

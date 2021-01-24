@@ -1,7 +1,7 @@
 package client.java.controllers.client;
 
-import client.resources.tools.Clock;
-import client.resources.tools.User;
+import client.java.controllers.tools.Clock;
+import client.java.controllers.tools.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;

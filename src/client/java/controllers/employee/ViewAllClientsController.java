@@ -2,9 +2,9 @@ package client.java.controllers.employee;
 
 import client.java.controllers.client.Main;
 import client.java.controllers.client.SceneCreator;
-import client.resources.tools.Client;
-import client.resources.tools.ClientCustomCell;
-import client.resources.tools.Clock;
+import client.java.controllers.tools.Client;
+import client.java.controllers.tools.ClientCustomCell;
+import client.java.controllers.tools.Clock;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

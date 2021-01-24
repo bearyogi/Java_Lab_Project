@@ -5,7 +5,7 @@ import client.java.controllers.client.SceneCreator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import client.resources.tools.Clock;
+import client.java.controllers.tools.Clock;
 
 import java.io.IOException;
 

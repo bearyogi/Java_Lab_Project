@@ -1,6 +1,6 @@
 package client.java.controllers.client;
 
-import client.resources.tools.User;
+import client.java.controllers.tools.User;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 

@@ -1,18 +1,19 @@
 package test.client.client;
 
 import client.java.controllers.client.Main;
-import client.resources.tools.Tour;
-import client.resources.tools.User;
+import client.java.controllers.tools.Tour;
+import client.java.controllers.tools.User;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.stage.Stage;
+import org.junit.Before;
+import org.junit.Test;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-@Test
+
 public class MainTest {
     //given
     Thread thread;
@@ -48,18 +49,9 @@ public class MainTest {
         //then
         assertEquals(tour,main.getTour(),"Should set and get tour properly,but did not.");
     }
-    @Test
-    public void shouldSetCorrectRoot(){
-        //given
-        Object expected;
-        //when
-        expected = getClass().getResource("../../../resources/fxml-files/LogInScene.fxml");
-        //then
-        assertEquals(main.getRoot(),expected,"Should load correct root, but did not.");
-    }
 
 
-    @BeforeTest
+    @Before
     public void configurateThread(){
          thread = new Thread(() -> {
             new JFXPanel();

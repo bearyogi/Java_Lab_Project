@@ -1,4 +1,4 @@
-package client.resources.tools;
+package client.java.controllers.tools;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

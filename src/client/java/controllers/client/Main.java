@@ -1,7 +1,7 @@
 package client.java.controllers.client;
 
-import client.resources.tools.Tour;
-import client.resources.tools.User;
+import client.java.controllers.tools.Tour;
+import client.java.controllers.tools.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

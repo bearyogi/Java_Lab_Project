@@ -3,7 +3,7 @@ package client.java.controllers.client;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import client.resources.tools.Clock;
+import client.java.controllers.tools.Clock;
 
 import java.io.IOException;
 
@@ -12,7 +12,7 @@ public class ContactController {
     Label clockLabel;
 
     public Clock clk;
-    Thread th;
+    public Thread th;
     @FXML
     public void initialize(){
          clk = new Clock(clockLabel);

@@ -2,7 +2,7 @@ package client.java.controllers.employee;
 
 import client.java.controllers.client.Main;
 import client.java.controllers.client.SceneCreator;
-import client.resources.tools.Clock;
+import client.java.controllers.tools.Clock;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;

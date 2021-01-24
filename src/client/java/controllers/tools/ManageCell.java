@@ -1,4 +1,4 @@
-package client.resources.tools;
+package client.java.controllers.tools;
 
 import client.java.controllers.client.Main;
 import client.java.controllers.client.SceneCreator;
@@ -16,67 +16,57 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Optional;
 
-public class ClientCustomCell extends ListCell<Client> {
+public class ManageCell extends ListCell<Reservation> {
     HBox hbox = new HBox();
     Label label = new Label("");
     Pane pane = new Pane();
-    Button editButtom = new Button();
-    Button deleteButton = new Button();
-    String clientData;
-    ObservableList<Client> list = FXCollections.observableArrayList();
-    int clientId;
-    public ClientCustomCell(String name, String name2) {
+    Button button = new Button();
+    Button payButton = new Button();
+    ObservableList<Reservation> list = FXCollections.observableArrayList();
+    int tourId;
+    public ManageCell(String name, String name2) {
         super();
-        editButtom.setMinSize(100,35);
-        editButtom.setMaxSize(100,35);
-        editButtom.setStyle("-fx-background-color: #62d813; -fx-opacity: 80%; -fx-text-fill: white;");
-        editButtom.setText(name);
+        button.setMinSize(100,35);
+        button.setMaxSize(100,35);
+        button.setStyle("-fx-background-color: #62d813; -fx-opacity: 80%; -fx-text-fill: white;");
+        button.setText(name);
 
-        deleteButton.setMinSize(100,35);
-        deleteButton.setMaxSize(100,35);
-        deleteButton.setStyle("-fx-background-color: #0066ff; -fx-opacity: 80%; -fx-text-fill: white;");
-        deleteButton.setText(name2);
+        payButton.setMinSize(100,35);
+        payButton.setMaxSize(100,35);
+        payButton.setStyle("-fx-background-color: #0066ff; -fx-opacity: 80%; -fx-text-fill: white;");
+        payButton.setText(name2);
 
         hbox.setSpacing(8);
-        hbox.getChildren().addAll(label, pane, editButtom, deleteButton);
+        hbox.getChildren().addAll(label, pane, button, payButton);
         HBox.setHgrow(pane, Priority.ALWAYS);
 
-        editButtom.setOnAction(event -> {
+        button.setOnAction(event -> {
             try {
-                getClientId(getItem().getIdUser());
-                getClientById(clientId);
-                SceneCreator.launchScene("../../../resources/fxml-files/EditCredensialsSceneAdmin.fxml", Main.getUser());
+                getTourId(getItem().getReservationId());
+                getTourFromServer(tourId);
+                SceneCreator.launchScene("../../../resources/fxml-files/ViewOneTourScene.fxml", Main.getUser());
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
 
-        deleteButton.setOnAction(event -> {
+        payButton.setOnAction(event -> {
             try {
-                getClientId(getItem().getIdUser());
+                if(getItem().getStatus().equals("doZaplaty")){
+                    confirmPopup();
+                    changeToPayed(getItem().getReservationId());
+                    getAllReservations();
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            try {
-                deleteClientFromServer(clientId);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                confirmPopup();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                getAllClients();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
         });
     }
 
     @Override
-    protected void updateItem(Client item, boolean empty) {
+    protected void updateItem(Reservation item, boolean empty) {
         super.updateItem(item, empty);
         setText(null);
         setGraphic(null);
@@ -87,8 +77,8 @@ public class ClientCustomCell extends ListCell<Client> {
         }
     }
 
-    public void getClientId(int id) throws IOException {
-        String query = "getClientId " + id;
+    public void getTourFromServer(int id) throws IOException {
+        String query = "getTour " + id;
         Socket s = new Socket("localhost", 4999);
         PrintWriter pr = new PrintWriter(s.getOutputStream());
         pr.println(query);
@@ -97,10 +87,18 @@ public class ClientCustomCell extends ListCell<Client> {
         InputStreamReader in = new InputStreamReader(s.getInputStream());
         BufferedReader bf = new BufferedReader(in);
         String str = bf.readLine();
-        clientId = Integer.parseInt(str);
+        String[] data = str.split("\\s+");
+        Main.getTour().setId(Integer.parseInt(data[0]));
+        Main.getTour().setTitle(data[1]);
+        Main.getTour().setText(data[2]);
+        Main.getTour().setDistance(Integer.parseInt(data[3]));
+        Main.getTour().setDays(Integer.parseInt(data[4]));
+        Main.getTour().setPrice(Integer.parseInt(data[5]));
+        Main.getTour().setAvailableTickets(Integer.parseInt(data[6]));
+        Main.getTour().setImage(data[7]);
     }
-    public void getClientById(int id) throws IOException {
-        String query = "getClientById " + id;
+    public void getTourId(int id) throws IOException {
+        String query = "getTourId " + id;
         Socket s = new Socket("localhost", 4999);
         PrintWriter pr = new PrintWriter(s.getOutputStream());
         pr.println(query);
@@ -109,16 +107,10 @@ public class ClientCustomCell extends ListCell<Client> {
         InputStreamReader in = new InputStreamReader(s.getInputStream());
         BufferedReader bf = new BufferedReader(in);
         String str = bf.readLine();
-        String[] all = str.split(" ");
-        Main.getUser().setId(Integer.parseInt(all[0]));
-        Main.getUser().setNick(all[1]);
-        Main.getUser().setPassword(all[2]);
-        Main.getUser().setName(all[3]);
-        Main.getUser().setSurname(all[4]);
-        Main.getUser().setEmail(all[5]);
+        tourId = Integer.parseInt(str);
     }
-    public void deleteClientFromServer(int id) throws IOException {
-        String query = "deleteClient " + id;
+    public void changeToPayed(int id) throws IOException {
+        String query = "changeToPayed " + id;
         Socket s = new Socket("localhost", 4999);
         PrintWriter pr = new PrintWriter(s.getOutputStream());
         pr.println(query);
@@ -128,8 +120,8 @@ public class ClientCustomCell extends ListCell<Client> {
         BufferedReader bf = new BufferedReader(in);
         String str = bf.readLine();
     }
-    public void getAllClients() throws IOException{
-        String result = "getAllClients ";
+    public void getAllReservations() throws IOException{
+        String result = "getAllReservations " + Main.getUser().getId();
         Socket s = new Socket("localhost", 4999);
         PrintWriter pr = new PrintWriter(s.getOutputStream());
         pr.println(result);
@@ -138,21 +130,21 @@ public class ClientCustomCell extends ListCell<Client> {
         BufferedReader bf = new BufferedReader(in);
         String str = bf.readLine();
         String[] all = str.split("#");
-        for(String client: all){
-            String[] one = client.split("@");
-            Client listClient = new Client(Integer.parseInt(one[0]),one[1],one[2],one[3],one[4]);
-            list.add(listClient);
+        for(String reservation: all){
+            String[] one = reservation.split("@");
+            Reservation listReservation = new Reservation(Integer.parseInt(one[0]),one[1],Integer.parseInt(one[2]),one[3],one[4]);
+            list.add(listReservation);
 
         }
         getListView().setItems(list);
-        getListView().setCellFactory(param -> new ClientCustomCell("Edytuj", "Usuń"));
+        getListView().setCellFactory(param -> new ManageCell("Przejrzyj", "Opłać"));
     }
     public void confirmPopup() throws IOException {
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Potwierdzenie");
-        alert.setHeaderText("Usunięcie");
-        alert.setContentText("Usunięto klienta o id: " + getItem().getIdUser() + "!");
+        alert.setHeaderText("Opłata");
+        alert.setContentText("Dziękujemy za opłacenie rezerwacji o id: " + getItem().getReservationId() + "!");
         alert.setX(750);
         alert.setY(384);
         Optional<ButtonType> result = alert.showAndWait();

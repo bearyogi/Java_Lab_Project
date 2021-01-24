@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="TestConfig" type="CompoundRunConfigurationType">
+    <toRun name="Server" type="Application" />
+    <toRun name="MainControllerTest" type="JUnit" />
+    <method v="2" />
+  </configuration>
+</component>
