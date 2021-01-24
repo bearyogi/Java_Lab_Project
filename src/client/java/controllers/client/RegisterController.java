@@ -16,7 +16,7 @@ import java.net.Socket;
 public class RegisterController {
 
   @FXML
-  Label errorLabel;
+  public Label errorLabel;
   @FXML
   TextField usernameBox;
   @FXML

@@ -16,7 +16,7 @@ import java.net.Socket;
 public class EditCredensialsController {
 
     @FXML
-    Label clockLabel;
+    public Label clockLabel;
     @FXML
     Label nameLabel;
     @FXML
@@ -38,7 +38,7 @@ public class EditCredensialsController {
     @FXML
     Label errorLabel;
 
-    Clock clk;
+    public Clock clk;
     Thread th;
     @FXML
     public void initialize(){
