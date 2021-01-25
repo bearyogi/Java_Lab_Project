@@ -12,6 +12,7 @@ Java client-server application for 3rd year university lessons.
 - MySQL 
 - Lombok
 - TestNG
+- JUnit
 
 ### Database
 Create database 'filmdb' via MySql CMD on your localhost and make sure it has all priviliges.
@@ -49,3 +50,5 @@ availableTickets varchar(45) NOT NULL,\
 image varchar(45) NOT NULL\
 );
 
+### vm options
+--module-path "path-to-your-javafx" --add-modules=javafx.controls,javafx.fxml
