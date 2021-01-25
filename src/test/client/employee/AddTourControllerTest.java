@@ -13,12 +13,10 @@ import org.junit.After;
 import org.junit.Test;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
-import java.io.IOException;
 import static org.testng.Assert.assertEquals;
 
 @org.testng.annotations.Test
 public class AddTourControllerTest extends ApplicationTest {
-    private MainController mainController;
     private AddTourController addTourController;
     static final String SCENE = "LogInScene.fxml";
     static final String SCENE_2 = "AddTourScene.fxml";
@@ -28,7 +26,7 @@ public class AddTourControllerTest extends ApplicationTest {
         String sceneName = "fxml-files/" + SCENE;
         FXMLLoader loader = new FXMLLoader(MainController.class.getClassLoader().getResource(sceneName));
         Parent mainNode = loader.load();
-        mainController = loader.getController();
+        MainController mainController = loader.getController();
         stage.setScene(new Scene(mainNode));
         Main.setUser(new User(1,"Tester","Testowy","tt@gmail.com","test","test"));
 

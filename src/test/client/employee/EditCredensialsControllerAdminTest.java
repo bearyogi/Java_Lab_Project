@@ -1,4 +1,4 @@
-package test.client.client;
+package test.client.employee;
 
 import client.java.controllers.client.*;
 import client.java.controllers.employee.EditCredensialsControllerAdmin;

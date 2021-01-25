@@ -37,21 +37,21 @@ public class EditTourController {
     @FXML
     Label imageLabel;
     @FXML
-    TextField titleInput;
+    public TextField titleInput;
     @FXML
-    TextField descInput;
+    public TextField descInput;
     @FXML
-    TextField distanceInput;
+    public TextField distanceInput;
     @FXML
-    TextField daysInput;
+    public TextField daysInput;
     @FXML
-    TextField priceInput;
+    public TextField priceInput;
     @FXML
-    TextField ticketInput;
+    public TextField ticketInput;
     @FXML
-    Label errorLabel;
+    public Label errorLabel;
     @FXML
-    ImageView imageView;
+    public ImageView imageView;
 
     Clock clk;
     Thread th;
@@ -69,8 +69,12 @@ public class EditTourController {
         daysLabel.setText(Main.getTour().getDays()+"");
         priceLabel.setText(Main.getTour().getPrice()+"");
         ticketLabel.setText(Main.getTour().getAvailableTickets()+"");
-        image = new Image("/client/resources/images/" + Main.getTour().getImage());
-        imageView.setImage(image);
+        try{
+            image = new Image("/client/resources/images/" + Main.getTour().getImage());
+            imageView.setImage(image);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         imageName = Main.getTour().getImage();
         titleInput.setText(Main.getTour().getTitle());
         descInput.setText(Main.getTour().getText());

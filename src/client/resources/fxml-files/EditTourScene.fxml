@@ -48,32 +48,32 @@
                     </font>
                 </Label>
                 <Line endX="1016.5" endY="159.5" layoutX="3.0" layoutY="383.0" startY="159.5" stroke="#908a8a" />
-                <Button fx:id="goBackButton" layoutX="144.0" layoutY="596.0" mnemonicParsing="false" onMouseClicked="#goBackButton" prefHeight="31.0" prefWidth="223.0" style="-fx-background-color: #0066ff; -fx-opacity: 70%;" text="Powrót" textFill="WHITE">
+                <Button id="goBackButton" fx:id="goBackButton" layoutX="144.0" layoutY="596.0" mnemonicParsing="false" onMouseClicked="#goBackButton" prefHeight="31.0" prefWidth="223.0" style="-fx-background-color: #0066ff; -fx-opacity: 70%;" text="Powrót" textFill="WHITE">
                     <font>
                         <Font size="19.0" />
                     </font>
                 </Button>
-                <TextField fx:id="titleInput" layoutX="21.0" layoutY="24.0" prefHeight="31.0" prefWidth="223.0" promptText="Wprowadź nowy tytuł" style="-fx-background-color: #525252;">
+                <TextField id="titleBox" fx:id="titleInput" layoutX="21.0" layoutY="24.0" prefHeight="31.0" prefWidth="223.0" promptText="Wprowadź nowy tytuł" style="-fx-background-color: #525252;">
                     <font>
                         <Font size="15.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="descInput" layoutX="797.0" layoutY="31.0" onKeyPressed="#updateDesc" onKeyReleased="#updateDesc" prefHeight="31.0" prefWidth="199.0" promptText="Wprowadź nowy opis" style="-fx-background-color: #525252;">
+                <TextField id="textBox" fx:id="descInput" layoutX="797.0" layoutY="31.0" onKeyPressed="#updateDesc" onKeyReleased="#updateDesc" prefHeight="31.0" prefWidth="199.0" promptText="Wprowadź nowy opis" style="-fx-background-color: #525252;">
                     <font>
                         <Font size="15.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="distanceInput" layoutX="21.0" layoutY="70.0" prefHeight="31.0" prefWidth="223.0" promptText="Wprowadź nową odległość" style="-fx-background-color: #525252;">
+                <TextField id="distanceBox" fx:id="distanceInput" layoutX="21.0" layoutY="70.0" prefHeight="31.0" prefWidth="223.0" promptText="Wprowadź nową odległość" style="-fx-background-color: #525252;">
                     <font>
                         <Font size="15.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="daysInput" layoutX="21.0" layoutY="115.0" prefHeight="31.0" prefWidth="223.0" promptText="Wprowadź nową ilość dni" style="-fx-background-color: #525252;">
+                <TextField id="daysBox" fx:id="daysInput" layoutX="21.0" layoutY="115.0" prefHeight="31.0" prefWidth="223.0" promptText="Wprowadź nową ilość dni" style="-fx-background-color: #525252;">
                     <font>
                         <Font size="15.0" />
                     </font>
                 </TextField>
-                <Button fx:id="confirmButton" layoutX="658.0" layoutY="596.0" mnemonicParsing="false" onMouseClicked="#confirmButton" prefHeight="31.0" prefWidth="223.0" style="-fx-background-color: #009933; -fx-opacity: 80%;" text="Potwierdź" textFill="WHITE">
+                <Button id="confirmButton" fx:id="confirmButton" layoutX="658.0" layoutY="596.0" mnemonicParsing="false" onMouseClicked="#confirmButton" prefHeight="31.0" prefWidth="223.0" style="-fx-background-color: #009933; -fx-opacity: 80%;" text="Potwierdź" textFill="WHITE">
                     <font>
                         <Font size="19.0" />
                     </font>
@@ -83,12 +83,12 @@
                         <Font size="16.0" />
                     </font>
                 </Label>
-            <TextField fx:id="priceInput" layoutX="21.0" layoutY="160.0" prefHeight="31.0" prefWidth="223.0" promptText="Wprowadź nową cenę" style="-fx-background-color: #525252;">
+            <TextField id="priceBox" fx:id="priceInput" layoutX="21.0" layoutY="160.0" prefHeight="31.0" prefWidth="223.0" promptText="Wprowadź nową cenę" style="-fx-background-color: #525252;">
                <font>
                   <Font size="15.0" />
                </font>
             </TextField>
-            <TextField fx:id="ticketInput" layoutX="21.0" layoutY="205.0" prefHeight="31.0" prefWidth="223.0" promptText="Wprowadź nową ilość biletów" style="-fx-background-color: #525252;">
+            <TextField id="ticketBox" fx:id="ticketInput" layoutX="21.0" layoutY="205.0" prefHeight="31.0" prefWidth="223.0" promptText="Wprowadź nową ilość biletów" style="-fx-background-color: #525252;">
                <font>
                   <Font size="15.0" />
                </font>
