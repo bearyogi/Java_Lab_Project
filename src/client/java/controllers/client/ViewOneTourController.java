@@ -22,23 +22,23 @@ public class ViewOneTourController {
     @FXML
     Label clockLabel;
     @FXML
-    Label titleLabel;
+    public Label titleLabel;
     @FXML
-    Label textLabel;
+    public Label textLabel;
     @FXML
-    Label daysLabel;
+    public Label daysLabel;
     @FXML
-    Label priceLabel;
+    public Label priceLabel;
     @FXML
-    Label availableLabel;
+    public Label availableLabel;
     @FXML
-    Label distanceLabel;
+    public Label distanceLabel;
     @FXML
-    ImageView imageView;
+    public ImageView imageView;
     @FXML
-    ChoiceBox choiceBox;
+    public ChoiceBox choiceBox;
     @FXML
-    Label errorLabel;
+    public Label errorLabel;
 
     Clock clk;
     Thread th;
