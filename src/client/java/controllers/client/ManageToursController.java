@@ -20,7 +20,7 @@ public class ManageToursController {
     Label clockLabel;
 
     @FXML
-    ListView<Reservation> manageList;
+    public ListView<Reservation> manageList;
     ObservableList<Reservation> list = FXCollections.observableArrayList();
     Clock clk;
     Thread th;

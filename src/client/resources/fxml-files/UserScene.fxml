@@ -20,21 +20,21 @@
       </Button>
       <AnchorPane layoutX="235.0" layoutY="51.0" prefHeight="718.0" prefWidth="793.0">
          <children>
-            <Button layoutX="73.0" layoutY="55.0" mnemonicParsing="false" onMouseClicked="#viewToursButton" prefHeight="36.0" prefWidth="647.0" style="-fx-background-color: #353238; -fx-opacity: 90%;" text="Zapoznaj się z ofertą wycieczek" textFill="WHITE" wrapText="true">
+            <Button id="tourButton" layoutX="73.0" layoutY="55.0" mnemonicParsing="false" onMouseClicked="#viewToursButton" prefHeight="36.0" prefWidth="647.0" style="-fx-background-color: #353238; -fx-opacity: 90%;" text="Zapoznaj się z ofertą wycieczek" textFill="WHITE" wrapText="true">
                <font>
                   <Font size="42.0" />
                </font></Button>
-            <Button layoutX="73.0" layoutY="209.0" mnemonicParsing="false" onMouseClicked="#viewReservationButton" prefHeight="93.0" prefWidth="647.0" style="-fx-background-color: #353238; -fx-opacity: 90%;" text="Przejrzyj swoje rezerwacje" textFill="WHITE" wrapText="true">
+            <Button id="reservationButton" layoutX="73.0" layoutY="209.0" mnemonicParsing="false" onMouseClicked="#viewReservationButton" prefHeight="93.0" prefWidth="647.0" style="-fx-background-color: #353238; -fx-opacity: 90%;" text="Przejrzyj swoje rezerwacje" textFill="WHITE" wrapText="true">
                <font>
                   <Font size="42.0" />
                </font>
             </Button>
-            <Button layoutX="73.0" layoutY="520.0" mnemonicParsing="false" onMouseClicked="#contactButton" prefHeight="93.0" prefWidth="647.0" style="-fx-background-color: #353238; -fx-opacity: 90%;" text="Kontakt z infolinią" textFill="WHITE" wrapText="true">
+            <Button id="contactButton" layoutX="73.0" layoutY="520.0" mnemonicParsing="false" onMouseClicked="#contactButton" prefHeight="93.0" prefWidth="647.0" style="-fx-background-color: #353238; -fx-opacity: 90%;" text="Kontakt z infolinią" textFill="WHITE" wrapText="true">
                <font>
                   <Font size="42.0" />
                </font>
             </Button>
-            <Button layoutX="73.0" layoutY="365.0" mnemonicParsing="false" onMouseClicked="#removeReservationButton" prefHeight="93.0" prefWidth="647.0" style="-fx-background-color: #353238; -fx-opacity: 90%;" text="Zrezygnuj z rezerwacji" textFill="WHITE" wrapText="true">
+            <Button id="removeReservationButton" layoutX="73.0" layoutY="365.0" mnemonicParsing="false" onMouseClicked="#removeReservationButton" prefHeight="93.0" prefWidth="647.0" style="-fx-background-color: #353238; -fx-opacity: 90%;" text="Zrezygnuj z rezerwacji" textFill="WHITE" wrapText="true">
                <font>
                   <Font size="42.0" />
                </font>
@@ -58,27 +58,27 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="emailLabel" layoutX="12.0" layoutY="372.0" prefHeight="36.0" prefWidth="242.0" text="Email" textFill="#b5b5b5">
+            <Label id="emailBox" fx:id="emailLabel" layoutX="12.0" layoutY="372.0" prefHeight="36.0" prefWidth="242.0" text="Email" textFill="#b5b5b5">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label fx:id="surnameLabel" layoutX="12.0" layoutY="274.0" prefHeight="36.0" prefWidth="242.0" text="Nazwisko" textFill="#b5b5b5">
+            <Label id="surnameBox" fx:id="surnameLabel" layoutX="12.0" layoutY="274.0" prefHeight="36.0" prefWidth="242.0" text="Nazwisko" textFill="#b5b5b5">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label fx:id="nameLabel" layoutX="12.0" layoutY="172.0" prefHeight="36.0" prefWidth="242.0" text="Imię" textFill="#b5b5b5">
+            <Label id="nameBox" fx:id="nameLabel" layoutX="12.0" layoutY="172.0" prefHeight="36.0" prefWidth="242.0" text="Imię" textFill="#b5b5b5">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label fx:id="nickLabel" layoutX="12.0" layoutY="466.0" prefHeight="36.0" prefWidth="242.0" text="Nazwa" textFill="#b5b5b5">
+            <Label id="nickBox" fx:id="nickLabel" layoutX="12.0" layoutY="466.0" prefHeight="36.0" prefWidth="242.0" text="Nazwa" textFill="#b5b5b5">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label fx:id="countLabel" layoutX="12.0" layoutY="562.0" prefHeight="36.0" prefWidth="242.0" text="Ilość wycieczek" textFill="#b5b5b5">
+            <Label id="reservationBox" fx:id="countLabel" layoutX="12.0" layoutY="562.0" prefHeight="36.0" prefWidth="242.0" text="Ilość wycieczek" textFill="#b5b5b5">
                <font>
                   <Font size="17.0" />
                </font>

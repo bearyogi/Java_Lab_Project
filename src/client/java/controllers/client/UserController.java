@@ -20,15 +20,15 @@ User activeUser = Main.getUser();
     @FXML
     Label helloUser;
     @FXML
-    Label nameLabel;
+    public Label nameLabel;
     @FXML
-    Label surnameLabel;
+    public Label surnameLabel;
     @FXML
-    Label nickLabel;
+    public Label nickLabel;
     @FXML
-    Label emailLabel;
+    public Label emailLabel;
     @FXML
-    Label countLabel;
+    public Label countLabel;
 
     Thread th;
     Clock clk;
