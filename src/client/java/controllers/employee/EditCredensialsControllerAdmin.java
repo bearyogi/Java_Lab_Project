@@ -20,25 +20,25 @@ public class EditCredensialsControllerAdmin {
     @FXML
     Label clockLabel;
     @FXML
-    Label nameLabel;
+    public Label nameLabel;
     @FXML
-    Label surnameLabel;
+    public Label surnameLabel;
     @FXML
-    Label emailLabel;
+    public Label emailLabel;
     @FXML
-    Label nickLabel;
+    public Label nickLabel;
     @FXML
-    Label passwordLabel;
+    public Label passwordLabel;
     @FXML
-    TextField nameInput;
+    public TextField nameInput;
     @FXML
-    TextField surnameInput;
+    public TextField surnameInput;
     @FXML
-    TextField emailInput;
+    public TextField emailInput;
     @FXML
-    TextField passwordInput;
+    public TextField passwordInput;
     @FXML
-    Label errorLabel;
+    public Label errorLabel;
 
     Clock clk;
     Thread th;
