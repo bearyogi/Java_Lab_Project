@@ -70,7 +70,7 @@ public class RegisterControllerTest extends ApplicationTest {
     public void shouldOnlyNameShowError(){
 
         //given
-        String expected = "";
+        String expected = "Wszystkie pola muszą zostać uzupełnione!";
         //when
         clickOn("#registerField");
         clickOn("#nameField");

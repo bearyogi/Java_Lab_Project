@@ -15,7 +15,7 @@ import org.testfx.framework.junit.ApplicationTest;
 import static org.testng.Assert.assertEquals;
 
 @org.testng.annotations.Test
-public class MainControllerTest extends ApplicationTest {
+public class AMainControllerTest extends ApplicationTest {
     private MainController mainController;
     static final String SCENE = "LogInScene.fxml";
 

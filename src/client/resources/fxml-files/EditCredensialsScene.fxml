@@ -57,37 +57,37 @@
                </font>
             </Label>
             <Line endX="1016.5" endY="159.5" layoutX="3.0" layoutY="383.0" startY="159.5" stroke="#908a8a" />
-            <Button fx:id="goBackButton" layoutX="144.0" layoutY="596.0" mnemonicParsing="false" onMouseClicked="#goBackButton" prefHeight="31.0" prefWidth="223.0" style="-fx-background-color: #0066ff; -fx-opacity: 70%;" text="Powrót" textFill="WHITE">
+            <Button id="goBackButton" fx:id="goBackButton" layoutX="144.0" layoutY="596.0" mnemonicParsing="false" onMouseClicked="#goBackButton" prefHeight="31.0" prefWidth="223.0" style="-fx-background-color: #0066ff; -fx-opacity: 70%;" text="Powrót" textFill="WHITE">
                <font>
                   <Font size="19.0" />
                </font>
             </Button>
-            <TextField fx:id="nameInput" layoutX="144.0" layoutY="156.0" prefHeight="31.0" prefWidth="223.0" promptText="Wprowadź nowe imię" style="-fx-background-color: #525252;">
+            <TextField id="nameBox" fx:id="nameInput" layoutX="144.0" layoutY="156.0" prefHeight="31.0" prefWidth="223.0" promptText="Wprowadź nowe imię" style="-fx-background-color: #525252;">
                <font>
                   <Font size="15.0" />
                </font>
             </TextField>
-            <TextField fx:id="surnameInput" layoutX="144.0" layoutY="229.0" prefHeight="31.0" prefWidth="223.0" promptText="Wprowadź nowe nazwisko" style="-fx-background-color: #525252;">
+            <TextField id="surnameBox" fx:id="surnameInput" layoutX="144.0" layoutY="229.0" prefHeight="31.0" prefWidth="223.0" promptText="Wprowadź nowe nazwisko" style="-fx-background-color: #525252;">
                <font>
                   <Font size="15.0" />
                </font>
             </TextField>
-            <TextField fx:id="emailInput" layoutX="144.0" layoutY="301.0" prefHeight="31.0" prefWidth="223.0" promptText="Wprowadź nowy adres e-mail" style="-fx-background-color: #525252;">
+            <TextField id="emailBox" fx:id="emailInput" layoutX="144.0" layoutY="301.0" prefHeight="31.0" prefWidth="223.0" promptText="Wprowadź nowy adres e-mail" style="-fx-background-color: #525252;">
                <font>
                   <Font size="15.0" />
                </font>
             </TextField>
-            <TextField fx:id="passwordInput" layoutX="144.0" layoutY="371.0" prefHeight="31.0" prefWidth="223.0" promptText="Wprowadź nowe hasło" style="-fx-background-color: #525252;">
+            <TextField id="passwordBox" fx:id="passwordInput" layoutX="144.0" layoutY="371.0" prefHeight="31.0" prefWidth="223.0" promptText="Wprowadź nowe hasło" style="-fx-background-color: #525252;">
                <font>
                   <Font size="15.0" />
                </font>
             </TextField>
-            <Button fx:id="confirmButton" layoutX="658.0" layoutY="596.0" mnemonicParsing="false" onMouseClicked="#confirmButton" prefHeight="31.0" prefWidth="223.0" style="-fx-background-color: #009933; -fx-opacity: 80%;" text="Potwierdź" textFill="WHITE">
+            <Button id="confirmButton" fx:id="confirmButton" layoutX="658.0" layoutY="596.0" mnemonicParsing="false" onMouseClicked="#confirmButton" prefHeight="31.0" prefWidth="223.0" style="-fx-background-color: #009933; -fx-opacity: 80%;" text="Potwierdź" textFill="WHITE">
                <font>
                   <Font size="19.0" />
                </font>
             </Button>
-            <Label fx:id="errorLabel" layoutX="144.0" layoutY="423.0" prefHeight="91.0" prefWidth="223.0" textFill="#f50000" wrapText="true">
+            <Label id="errorBox" fx:id="errorLabel" layoutX="144.0" layoutY="423.0" prefHeight="91.0" prefWidth="223.0" textFill="#f50000" wrapText="true">
                <font>
                   <Font size="16.0" />
                </font>

@@ -15,7 +15,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 
-public class MainTest {
+public class AMainTest {
     //given
     Thread thread;
     Main main;
