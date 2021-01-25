@@ -35,21 +35,21 @@ public class AddTourController {
     @FXML
     Label ticketLabel;
     @FXML
-    TextField titleInput;
+    public TextField titleInput;
     @FXML
-    TextField descInput;
+    public TextField descInput;
     @FXML
-    TextField distanceInput;
+    public TextField distanceInput;
     @FXML
-    TextField daysInput;
+    public TextField daysInput;
     @FXML
-    TextField priceInput;
+    public TextField priceInput;
     @FXML
-    TextField ticketInput;
+    public TextField ticketInput;
     @FXML
     TextField imageInput;
     @FXML
-    Label errorLabel;
+    public Label errorLabel;
     @FXML
     ImageView imageView;
 
