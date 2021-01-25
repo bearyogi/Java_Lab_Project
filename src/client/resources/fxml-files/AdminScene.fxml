@@ -20,16 +20,16 @@
         </Button>
         <AnchorPane layoutX="235.0" layoutY="51.0" prefHeight="718.0" prefWidth="793.0">
             <children>
-                <Button fx:id="addTourButton" layoutX="73.0" layoutY="55.0" mnemonicParsing="false" onMouseClicked="#addTourButton" prefHeight="36.0" prefWidth="647.0" style="-fx-background-color: #353238; -fx-opacity: 90%;" text="Dodaj/Usuń wycieczkę" textFill="WHITE" wrapText="true">
+                <Button id="toursBox" fx:id="addTourButton" layoutX="73.0" layoutY="55.0" mnemonicParsing="false" onMouseClicked="#addTourButton" prefHeight="36.0" prefWidth="647.0" style="-fx-background-color: #353238; -fx-opacity: 90%;" text="Dodaj/Usuń wycieczkę" textFill="WHITE" wrapText="true">
                     <font>
                         <Font size="42.0" />
                     </font></Button>
-                <Button fx:id="viewReservationsButton" layoutX="73.0" layoutY="209.0" mnemonicParsing="false" onMouseClicked="#viewReservationsButton" prefHeight="93.0" prefWidth="647.0" style="-fx-background-color: #353238; -fx-opacity: 90%;" text="Przejrzyj uczestników wycieczek" textFill="WHITE" wrapText="true">
+                <Button id="reservationBox" fx:id="viewReservationsButton" layoutX="73.0" layoutY="209.0" mnemonicParsing="false" onMouseClicked="#viewReservationsButton" prefHeight="93.0" prefWidth="647.0" style="-fx-background-color: #353238; -fx-opacity: 90%;" text="Przejrzyj uczestników wycieczek" textFill="WHITE" wrapText="true">
                     <font>
                         <Font size="42.0" />
                     </font>
                 </Button>
-                <Button fx:id="clientListButton" layoutX="73.0" layoutY="365.0" mnemonicParsing="false" onMouseClicked="#clientListButton" prefHeight="93.0" prefWidth="647.0" style="-fx-background-color: #353238; -fx-opacity: 90%;" text="Lista klientów" textFill="WHITE" wrapText="true">
+                <Button id="clientBox" fx:id="clientListButton" layoutX="73.0" layoutY="365.0" mnemonicParsing="false" onMouseClicked="#clientListButton" prefHeight="93.0" prefWidth="647.0" style="-fx-background-color: #353238; -fx-opacity: 90%;" text="Lista klientów" textFill="WHITE" wrapText="true">
                     <font>
                         <Font size="42.0" />
                     </font>

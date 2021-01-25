@@ -1,5 +1,4 @@
-package test.client.client;
-
+package test.client.employee;
 import client.java.controllers.client.Main;
 import client.java.controllers.client.MainController;
 import client.java.controllers.employee.AddTourController;
