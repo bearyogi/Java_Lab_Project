@@ -23,7 +23,7 @@ public class Server {
         Semaphore semaphore = new Semaphore(1);
 
         Statement stat = connection.createStatement();
-        String sql = "";
+        String sql;
         String resId = "";
         String tourId = "";
         String nowString = LocalDate.now().toString();

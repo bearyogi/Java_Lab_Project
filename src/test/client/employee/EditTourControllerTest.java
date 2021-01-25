@@ -21,7 +21,6 @@ import static org.testng.Assert.assertEquals;
 
 @org.testng.annotations.Test
 public class EditTourControllerTest extends ApplicationTest {
-    private MainController mainController;
     private EditTourController editTourController;
     static final String SCENE = "LogInScene.fxml";
     static final String SCENE_2 = "EditTourScene.fxml";
@@ -32,7 +31,7 @@ public class EditTourControllerTest extends ApplicationTest {
         String sceneName = "fxml-files/" + SCENE;
         FXMLLoader loader = new FXMLLoader(MainController.class.getClassLoader().getResource(sceneName));
         Parent mainNode = loader.load();
-        mainController = loader.getController();
+        MainController mainController = loader.getController();
         stage.setScene(new Scene(mainNode));
 
 

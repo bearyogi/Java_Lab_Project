@@ -56,7 +56,6 @@ public class EditTourController {
     Clock clk;
     Thread th;
     String imageName;
-    private File selectedImage;
     Image image;
     @FXML
     public void initialize(){
@@ -151,7 +150,7 @@ public class EditTourController {
 
         FileChooser fc = new FileChooser();
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Images(png,jpg)", "*.jpg", "*.png"));
-        selectedImage = fc.showOpenDialog(null);
+        File selectedImage = fc.showOpenDialog(null);
         if (selectedImage == null)
             return;
         else if (ImageIO.read(selectedImage) == null) {

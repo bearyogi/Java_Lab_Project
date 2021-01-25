@@ -12,8 +12,7 @@ import org.junit.Test;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 
 public class ContactControllerTest extends ApplicationTest {
@@ -37,7 +36,7 @@ public class ContactControllerTest extends ApplicationTest {
         //when
 
         //then
-        assertTrue(contactController.clk != null,"Should initialize clock, but did not.");
+        assertNotNull(contactController.clk, "Should initialize clock, but did not.");
     }
     @Test
     public void shouldStopClk(){

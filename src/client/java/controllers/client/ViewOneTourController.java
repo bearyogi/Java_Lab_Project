@@ -36,7 +36,7 @@ public class ViewOneTourController {
     @FXML
     public ImageView imageView;
     @FXML
-    public ChoiceBox choiceBox;
+    public ChoiceBox<Integer> choiceBox;
     @FXML
     public Label errorLabel;
 
@@ -80,7 +80,7 @@ public class ViewOneTourController {
     }
     @FXML
     public void makeReservationButton(MouseEvent event) throws IOException {
-        if((Integer)choiceBox.getValue() <= Main.getTour().getAvailableTickets()){
+        if(choiceBox.getValue() <= Main.getTour().getAvailableTickets()){
             changeAvailableTickets();
             makeReservation();
             SceneCreator.launchScene("../../../resources/fxml-files/UserScene.fxml",Main.getUser());
@@ -105,7 +105,7 @@ public class ViewOneTourController {
     }
 
     public void changeAvailableTickets() throws IOException {
-        int availableAfterReservation = Main.getTour().getAvailableTickets() - (Integer)choiceBox.getValue();
+        int availableAfterReservation = Main.getTour().getAvailableTickets() - choiceBox.getValue();
         String result = "changeAvailableTickets "+Main.getTour().getId()+" "+availableAfterReservation;
         Socket s = new Socket("localhost", 4999);
         PrintWriter pr = new PrintWriter(s.getOutputStream());
@@ -121,7 +121,7 @@ public class ViewOneTourController {
     public void makeReservation() throws IOException {
         java.util.Date datetest = new java.util.Date();
         Date data = new Date(datetest.getTime());
-        String result = "makeReservation " + Main.getUser().getId() + " " + Main.getTour().getId() + " " + (Integer)choiceBox.getValue()*Main.getTour().getPrice() + " " + data.toString() + " " + "doZaplaty";
+        String result = "makeReservation " + Main.getUser().getId() + " " + Main.getTour().getId() + " " + choiceBox.getValue()*Main.getTour().getPrice() + " " + data.toString() + " " + "doZaplaty";
         Socket s = new Socket("localhost", 4999);
         PrintWriter pr = new PrintWriter(s.getOutputStream());
         pr.println(result);

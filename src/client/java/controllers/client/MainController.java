@@ -81,8 +81,7 @@ public class MainController {
         InputStreamReader in = new InputStreamReader(s.getInputStream());
         BufferedReader bf = new BufferedReader(in);
 
-        String str = bf.readLine();
-        return str;
+        return bf.readLine();
     }
 
 }

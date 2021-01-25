@@ -2,7 +2,6 @@ package test.client.client;
 
 import client.java.controllers.client.Main;
 import client.java.controllers.client.MainController;
-import client.java.controllers.client.UserController;
 import client.java.controllers.client.ViewOneTourController;
 import client.java.controllers.tools.Tour;
 import client.java.controllers.tools.User;
@@ -16,12 +15,10 @@ import org.junit.After;
 import org.junit.Test;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
-import java.io.IOException;
 import static org.testng.Assert.assertEquals;
 
 @org.testng.annotations.Test
 public class ViewOneTourTest extends ApplicationTest {
-    private MainController mainController;
     private ViewOneTourController viewOneTourController;
     static final String SCENE = "LogInScene.fxml";
     static final String SCENE_2 = "ViewOneTourScene.fxml";
@@ -31,7 +28,7 @@ public class ViewOneTourTest extends ApplicationTest {
         String sceneName = "fxml-files/" + SCENE;
         FXMLLoader loader = new FXMLLoader(MainController.class.getClassLoader().getResource(sceneName));
         Parent mainNode = loader.load();
-        mainController = loader.getController();
+        MainController mainController = loader.getController();
         stage.setScene(new Scene(mainNode));
         Main.setUser(new User(1,"Tester","Testowy","tt@gmail.com","test","test"));
         Main.setTour(new Tour(1,"test","test","test",1,1,1,1));

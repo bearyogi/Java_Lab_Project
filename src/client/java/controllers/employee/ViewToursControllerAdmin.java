@@ -173,7 +173,7 @@ public class ViewToursControllerAdmin {
             deleteButton.setStyle("-fx-opacity: 0.7; -fx-background-color:  #e70d0d");
         });
     }
-    public void confirmPopup() throws IOException {
+    public void confirmPopup() {
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Potwierdzenie");

@@ -47,8 +47,6 @@ public class AddTourController {
     @FXML
     public TextField ticketInput;
     @FXML
-    TextField imageInput;
-    @FXML
     public Label errorLabel;
     @FXML
     ImageView imageView;
@@ -57,7 +55,7 @@ public class AddTourController {
     Thread th;
     Image image;
     String imageName;
-    private File selectedImage;
+
     @FXML
     public void initialize(){
         clk = new Clock(clockLabel);
@@ -151,7 +149,7 @@ public class AddTourController {
 
             FileChooser fc = new FileChooser();
             fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Images(png,jpg)", "*.jpg", "*.png"));
-            selectedImage = fc.showOpenDialog(null);
+        File selectedImage = fc.showOpenDialog(null);
             if (selectedImage == null)
                 return;
             else if (ImageIO.read(selectedImage) == null) {

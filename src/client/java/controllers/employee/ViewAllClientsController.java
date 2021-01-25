@@ -27,7 +27,6 @@ public class ViewAllClientsController {
     ObservableList<Client> list = FXCollections.observableArrayList();
     Clock clk;
     Thread th;
-    int toBeDeletedId;
 
     @FXML
     public void initialize() throws IOException {

@@ -1,13 +1,11 @@
 package test.client.client;
 
 import client.java.controllers.client.Main;
-import client.java.controllers.client.RegisterController;
 import client.java.controllers.tools.Tour;
 import client.java.controllers.tools.User;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.stage.Stage;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -18,7 +18,6 @@ import static org.testng.Assert.assertEquals;
 
 @org.testng.annotations.Test
 public class EditCredensialsControllerTest extends ApplicationTest {
-    private MainController mainController;
     private EditCredensialsController editCredensialsController;
     static final String SCENE = "LogInScene.fxml";
     static final String SCENE_2 = "EditCredensialsScene.fxml";
@@ -29,7 +28,7 @@ public class EditCredensialsControllerTest extends ApplicationTest {
         String sceneName = "fxml-files/" + SCENE;
         FXMLLoader loader = new FXMLLoader(MainController.class.getClassLoader().getResource(sceneName));
         Parent mainNode = loader.load();
-        mainController = loader.getController();
+        MainController mainController = loader.getController();
         stage.setScene(new Scene(mainNode));
         Main.setUser(new User(1,"Tester","Testowy","tt@gmail.com","test","test"));
 

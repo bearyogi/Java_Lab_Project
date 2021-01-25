@@ -24,7 +24,6 @@ public class ManageToursController {
     ObservableList<Reservation> list = FXCollections.observableArrayList();
     Clock clk;
     Thread th;
-    int toBeDeletedId;
 
     @FXML
     public void initialize() throws IOException {

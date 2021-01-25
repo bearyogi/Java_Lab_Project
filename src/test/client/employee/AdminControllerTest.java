@@ -16,8 +16,6 @@ import org.testfx.framework.junit.ApplicationTest;
 
 @org.testng.annotations.Test
 public class AdminControllerTest extends ApplicationTest {
-    private MainController mainController;
-    private AdminController adminController;
     static final String SCENE = "LogInScene.fxml";
     static final String SCENE_2 = "AdminScene.fxml";
     //given
@@ -26,14 +24,14 @@ public class AdminControllerTest extends ApplicationTest {
         String sceneName = "fxml-files/" + SCENE;
         FXMLLoader loader = new FXMLLoader(MainController.class.getClassLoader().getResource(sceneName));
         Parent mainNode = loader.load();
-        mainController = loader.getController();
+        MainController mainController = loader.getController();
         stage.setScene(new Scene(mainNode));
         Main.setUser(new User(1,"Tester","Testowy","tt@gmail.com","test","test"));
 
         sceneName = "fxml-files/" + SCENE_2;
         loader = new FXMLLoader(AdminController.class.getClassLoader().getResource(sceneName));
         mainNode = loader.load();
-        adminController = loader.getController();
+        AdminController adminController = loader.getController();
         stage.setScene(new Scene(mainNode));
         stage.show();
         stage.toFront();
