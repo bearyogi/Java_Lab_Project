@@ -16,8 +16,8 @@ It has server, which connects with MySql database and client sides.\
 Client can be either customer or employee of agency (login/password "admin").
 ## Screenshots
 <p align="left">
-  <img src="./img/img1.png" height="400" width="500" alt="Img1">
-  <img src="./img/img2.png" height="400" width="500" alt="Img2">
+  <img src="./img/img1.png" height="300" width="400" alt="Img1">
+  <img src="./img/img2.png" height="300" width="400" alt="Img2">
   <img src="./img/img3.png" height="400" width="500" alt="Img3">
   <img src="./img/img4.png" height="400" width="500" alt="Img4">
   <img src="./img/img5.png" height="400" width="500" alt="Img5">
