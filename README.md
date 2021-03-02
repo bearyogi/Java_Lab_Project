@@ -18,16 +18,16 @@ Client can be either customer or employee of agency (login/password "admin").
 <p align="left">
   <img src="./img/img1.png" height="300" width="400" alt="Img1">
   <img src="./img/img2.png" height="300" width="400" alt="Img2">
-  <img src="./img/img3.png" height="400" width="500" alt="Img3">
-  <img src="./img/img4.png" height="400" width="500" alt="Img4">
-  <img src="./img/img5.png" height="400" width="500" alt="Img5">
-  <img src="./img/img6.png" height="400" width="500" alt="Img6">
-  <img src="./img/img7.png" height="400" width="500" alt="Img7">
-  <img src="./img/img8.png" height="400" width="500" alt="Img8">
-  <img src="./img/img9.png" height="400" width="500" alt="Img9">
-  <img src="./img/img10.png" height="400" width="500" alt="Img10">
-  <img src="./img/img11.png" height="400" width="500" alt="Img11">
-  <img src="./img/img12.png" height="400" width="500" alt="Img12">
+  <img src="./img/img3.png" height="300" width="400" alt="Img3">
+  <img src="./img/img4.png" height="300" width="400" alt="Img4">
+  <img src="./img/img5.png" height="300" width="400" alt="Img5">
+  <img src="./img/img6.png" height="300" width="400" alt="Img6">
+  <img src="./img/img7.png" height="300" width="400" alt="Img7">
+  <img src="./img/img8.png" height="300" width="400" alt="Img8">
+  <img src="./img/img9.png" height="300" width="400" alt="Img9">
+  <img src="./img/img10.png" height="300" width="400" alt="Img10">
+  <img src="./img/img11.png" height="300" width="400" alt="Img11">
+  <img src="./img/img12.png" height="300" width="400" alt="Img12">
 </p>
 
 ## Techstack:
